@@ -1,0 +1,18 @@
+API findAll Video:
+    + Subject entity(khóa học)
+    + Video entity(video)
+Relational Mapping:1-n
+BaseUrl:abc.com://subjects/videos
+Response:
+    Header:200
+    Body:
+        {[
+            Video
+        ]}
+    Header:500
+    Body:
+        {
+            message,
+            timestamp
+        }
+
