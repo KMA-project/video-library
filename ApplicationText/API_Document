@@ -1,18 +1,37 @@
-API findAll Video:
-    + Subject entity(khóa học)
+API GetSubDetails:
+Input:subjectName
+Entity:
+    + Subject entity(môn học)
     + Video entity(video)
+    + Document entity(tài liệu tham khảo)
 Relational Mapping:1-n
 BaseUrl:abc.com://subjects/videos
-Response:
-    Header:200
+Output Response:
+    Header:
+        HttpMethod:200
     Body:
-        {[
-            Video
-        ]}
-    Header:500
+        [
+            {
+                subId:int,
+                subName:String,
+                created_Date:String,
+                videos:[{
+                    Id:int,
+                    name:String
+                    created_Date:String
+                }]
+                documents:[{
+                    Id:int,
+                    name:String
+                    created_Date
+                }]
+
+            }
+        ]
+    Header:
+        HttpMethod:200
     Body:
         {
             message,
             timestamp
         }
-
