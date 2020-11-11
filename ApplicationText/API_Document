@@ -29,7 +29,7 @@ Output Response:
             }
         ]
     Header:
-        HttpMethod:200
+        HttpMethod:500
     Body:
         {
             message,
