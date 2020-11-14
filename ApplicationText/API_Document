@@ -14,16 +14,17 @@ Output Response:
             {
                 subId:int,
                 subName:String,
-                created_Date:String,
+                createdDate:String,
                 videos:[{
                     Id:int,
                     name:String
-                    created_Date:String
+                    createdDate:String
                 }]
                 documents:[{
                     Id:int,
                     name:String
-                    created_Date
+                    createdDate:
+
                 }]
 
             }
