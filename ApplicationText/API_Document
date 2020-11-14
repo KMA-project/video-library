@@ -1,5 +1,5 @@
 API GetSubDetails:
-Input:subjectName
+Input:subjectId
 Entity:
     + Subject entity(môn học)
     + Video entity(video)
