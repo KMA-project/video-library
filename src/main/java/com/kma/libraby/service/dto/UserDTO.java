@@ -1,4 +1,4 @@
-package com.kma.libraby.dto;
+package com.kma.libraby.service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @Setter
 @Getter

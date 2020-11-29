@@ -1,10 +1,10 @@
 CREATE TABLE USER(
     Id TINYINT AUTO_INCREMENT PRIMARY KEY,
-    userId CHAR(8),
+    UserId CHAR(8),
     password TEXT NOT NULL ,
-    fullName NVARCHAR(150) NOT NULL ,
-    sex CHAR(5) DEFAULT 'male',
-    createdDate CHAR(17),
+    FullName NVARCHAR(50) NOT NULL ,
+    sex CHAR(5) DEFAULT 'Male',
+    CreatedDate CHAR(17),
     active BIT DEFAULT TRUE,
     roleId TINYINT,
     CONSTRAINT FK_USER_ROLE FOREIGN KEY (roleId) REFERENCES ROLE(Id)

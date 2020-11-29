@@ -1,4 +1,4 @@
-package com.kma.libraby.service;
+package com.kma.libraby.service.mapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

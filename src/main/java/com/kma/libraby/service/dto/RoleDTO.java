@@ -1,4 +1,4 @@
-package com.kma.libraby.dto;
+package com.kma.libraby.service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

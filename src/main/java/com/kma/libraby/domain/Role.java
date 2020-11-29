@@ -1,4 +1,4 @@
-package com.kma.libraby.models;
+package com.kma.libraby.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -26,7 +26,8 @@ public class Role implements Serializable {
     @Column(name = "name")
     private String roleName;
 
-    @OneToMany(mappedBy = "role",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-    private List<User> users;
+    @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE,CascadeType.REFRESH})
+    private List<UserEntity> users;
 
 }
