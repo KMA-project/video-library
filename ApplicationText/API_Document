@@ -5,8 +5,9 @@ Entity:
     + Video entity(video)
     + Document entity(tài liệu tham khảo)
 Relational Mapping:1-n
-BaseUrl:abc.com://subjects/videos
+BaseUrl:ddnshop.site://subjects/videos
 Output Response:
+SUCCESS
     Header:
         HttpMethod:200
     Body:
@@ -29,10 +30,31 @@ Output Response:
 
             }
         ]
+FAILED
     Header:
         HttpMethod:500
     Body:
         {
             message,
             timestamp
-        }
+         }
+API login:
+Input:UserId,password
+BaseUrl:ddnshop.site://auth
+Output Response:
+SUCCESS:
+    Header:
+        HttpMethod:200
+        Authorization: Bearer id_token
+    Body:
+        "id_token: string"
+FORBIDDED:
+    Header:
+        HttpMethod:403
+    Body:
+
+
+
+
+
+

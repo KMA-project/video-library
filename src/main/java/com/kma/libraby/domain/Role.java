@@ -17,17 +17,16 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties("users")
 public class Role implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    @Column(name = "role_id")
+    private int roleId;
 
-    @Column(name = "name")
+    @Column(name = "name",length = 20,nullable = false)
     private String roleName;
 
-    @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY,
-            cascade = {CascadeType.MERGE,CascadeType.REFRESH})
-    private List<UserEntity> users;
+    @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
+    private List<Account> users;
 
 }
