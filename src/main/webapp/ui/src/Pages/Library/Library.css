@@ -98,129 +98,100 @@ a:hover{
 /* END HEADER */
 
 /* NAVBAR */
-.container-home{
-	width:100%;
-	display:block;
-	margin:25px 0 0 0;
+.sidebar{
+    padding: 1rem 0;
 }
-
-.left-home{
-	width:25%; 
-	float:left;
-	min-height:500px;
-	margin:0px;
-}
-#left{
-	z-index: 500;
-	margin-top: 10px;
-	width: 100%;
-	float: left;
-	margin-left: 4px;
-}
-.slidebar{
-	padding-bottom: 10px;
-}
-.sidebar-menu, .main-sidebar .user-panel, .sidebar-menu>li.header {
-    white-space: nowrap!important;
-    overflow: hidden;
-}
-.sidebar-menu {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-.sidebar-menu>li {
-    position: relative;
-	margin: 0;
-}
-.sidebar-menu li.header {
-    padding: 10px 25px 10px 15px;
+.widget-title h1{
+    color: gray;
+    font-weight: normal;
     font-size: 12px;
-}
-.skin-green-light .sidebar-menu>li.header {
-    color: #848484;
-    background: #f9fafc;
-}
-.skin-green-light .sidebar-menu>li>a {
-    border-left: 3px solid transparent;
-    font-weight: 600;
-}
-.skin-green-light .sidebar a {
-    color: #444;
-}
-.sidebar-menu li>a {
-	position: relative;
-	text-decoration: none;
-}
-.sidebar-menu>li>a {
-    padding: 12px 5px 12px 15px;
-    display: block;
-}
-.sidebar-form, .sidebar-menu>li.header {
-    overflow: hidden;
-    text-overflow: clip;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-left: 1rem;
 }
 
-.skin-green-light .sidebar-menu>li>.dropdown-menu {
-    background: #f4f4f5;
-}
-.sidebar-menu li>a>.pull-right {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    margin-top: -7px;
-}
-.sidebar-menu li>a>.fa-angle-left {
-    width: auto;
-    height: auto;
-    padding: 0;
-    margin-right: 10px;
-}
-.sidebar-menu li.active>a>.fa-angle-left {
-    transform: rotate(-90deg);
-}
-.sidebar-menu .dropdown-menu {
-   
+.menu{
+    padding:.5rem 0 0 0 ;
+    margin: 0;
     list-style: none;
+}
+
+.menu li{
+    display: block;
+    position: relative;
+}
+
+.menu li a{
+    display: inline-block;
+    width: 100%;
+    font-weight: bold;
+    position: relative;
+    padding: 1.25rem;
+}
+
+/* .menu li {
+    background-color: #0072bc;
+} */
+/* .menu li a:hover{
+    color: none;
+    background-color: none;
+} */
+
+.menu li a .fa-laptop{
+    margin-right: 5px;
+}
+
+.menu li a .fa-angle-left{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+/* .menu li:hover .sub-menu{ display: block } */
+.menu li .sub-menu {
+    /* position: absolute; */
+    /* display: inline-block; */
+    position: relative;
+    max-height: 0;
+    overflow: hidden;
+    /* transform-origin: left top; */
+  /* transform: scaleY(0); */
+    transition: all .5s ease-in-out;
+    width: 100%;
     padding: 0;
     margin: 0;
-    padding-left: 5px;
+    background-color: rgb(244, 244, 245);
 }
-.sidebar-menu .dropdown-menu>li {
-    margin: 0;
+
+.menu li .sub-menu li a{
+    padding: .75rem 1.25rem;
+    font-weight: normal;
+    color: grey;
 }
-.skin-green-light .dropdown-menu>li>a {
-    color: #777;
+
+.menu li .sub-menu li a:hover{ color: black; }
+.menu li:hover .sub-menu {
+    max-height: 200px;
+    /* transform: scaleY(1); */
 }
-.sidebar-menu .dropdown-menu>li>a {
-    padding: 5px 5px 5px 15px;
+
+.menu li .sub-menu li .nested-sub-menu {
+    position: fixed;
+    display: none;
+    /* display: table;      */
+    z-index: 10000;
+    top: 95px;
+    left: 380px;
+    width: 500px;
+    height: 500px;
+    background-color: rgb(244, 244, 245);
+}
+.menu li .sub-menu li .nested-sub-menu li {
+    display: inline-block;
+}
+.menu li .sub-menu li:hover .nested-sub-menu {
     display: block;
-    font-size: 14px;
 }
-.skin-green-light .dropdown-menu>li>a:hover {
-    color: #000;
-}
-.skin-green-light .sidebar-menu>li>a {
-    border-left: 3px solid transparent;
-}
-.skin-green-light .sidebar a:hover {
-    text-decoration: none;
-    background-color: #0072bc !important;
-}
-.dropdown-menu{
-    width: 100%;
-    border: none;
-}
-
-.dropdown-toggle::after {
-    display:none
-}
-.dropdown-item{
-    width: 100%;
-    padding: 3px 0px;
-
-}
-
 /* MAIN HOME */
 .main-home{
 	width:75%;

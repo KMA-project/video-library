@@ -13,6 +13,7 @@ function* handleLoginAccountRequest(action) {
         sessionStorage.setItem("account", JSON.stringify(data));
         // console.log("reached");
         // if (statusText === "OK") {
+            // console.log(data);
             yield put(LoginActions.loginAccountSuccess(action.payload));
         // }
 
