@@ -102,16 +102,7 @@
   .library {
     margin-left: -17px !important;
   }
-  /* .carousel-inner {
-    height: 350px;
-    width: 100%;
-  }
   
-  .content-link a {
-    text-decoration: none;
-    text-align: left;
-    padding: 20px;
-  } */
   
   .newNotification {
     margin-left: -20px;
@@ -123,7 +114,7 @@
     float: left;
     height: 100px;
     text-align: left;
-    background-color: #007c7c;
+    /* background-color: #007c7c; */
     min-height: 100px;
     margin: auto;
     margin-top: 100px;

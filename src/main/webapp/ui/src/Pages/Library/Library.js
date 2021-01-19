@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
+import "./Click.js";
 import "./Library.css";
-
 import Viewpost_Image from "../../assets/img/viewpost.gif";
 import Screenshot_202329 from "../../assets/img/Screenshot 2020-11-18 202329.png";
 import Screenshot_203722 from "../../assets/img/Screenshot 2020-11-18 203722.png";
@@ -11,6 +11,7 @@ import SendEmail from "../../assets/img/sendemail.png";
 import Print from "../../assets/img/print.png";
 import AddToFavorites from "../../assets/img/addtofavorites.png";
 class Library extends Component {
+  
   render() {
     return (
       <Fragment>
@@ -438,231 +439,138 @@ class Library extends Component {
                             <div style={{ clear: "both" }} />
                           </div>
                           {/* COURSE*/}
-                          <div className="myCourse container">
-                            <div className="row " id="show_Course"></div>
-                            <div className="content__paging">
-                              <ul>
-                                <li className="btn-prev btn-active">
-                                  <i className="fa fa-angle-left" />
-                                </li>
-                                <div className="number-page" id="number-page">
-                                  {/* <li class="active">
-																<a href="">1</a> 
-															</li>
-															<li >
-																<a href="">2</a> 
-															</li>
-															<li>
-																<a href="">3</a>
-															</li> */}
-                                </div>
-                                <li className="btn-next">
-                                  <i className="fa fa-angle-right" />
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                        {/* VIDEO */}
-                        <div className="choose_video">
-                          <div className="choose">
-                            <h4>
-                              <span id="course_kma">
-                                Khóa học |
-                                <span
-                                  style={{ position: "absolute", right: "5px" }}
-                                ></span>
-                              </span>
-                              <span id="document_kma">
-                                {" "}
-                                Tài liệu tham khảo
-                                <span
-                                  style={{ position: "absolute", right: "5px" }}
-                                ></span>
-                                <span
-                                  id="back"
-                                  style={{ position: "absolute", right: "5px" }}
-                                >
-                                  <a
-                                    href="../libaryvideo/libary.html"
-                                    style={{
-                                      color: "white",
-                                      fontSize: "12px",
-                                      textTransform: "none",
-                                    }}
-                                  >
-                                    <b>Quay lại </b>
-                                  </a>
-                                </span>
-                              </span>
-                            </h4>
-                            <div className="document">
-                              <ul>
-                                <li>
-                                  <a href="http://thuvienso.actvn.edu.vn/bst/bo-suu-tap-tai-lieu-hoc-tieng-anh-1737-0.html">
-                                    Bài tập chương 1{" "}
+                          <div className="myCourses ">
+                            <div className="video-controls">
+                              <video controls allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
+                                <source src="./video/https___login.codepro.vn_Home_CourseScreen1_unitID=50 - Google Chrome 2020-06-17 21-49-38.mp4" />
+                              </video>
+                              <div className="scorm-info-wr">
+                                <p className="course-section-name">Chương 1. Ma trận - định thức</p>
+                                <h1 className="scorm-name">Bài 1. Ma trận</h1>
+                                <p className="scorm-play-time">Độ dài: 19 phút</p>
+                              </div>
+                              <ul className="scorm-detail-documents clearfix">
+                                <li className="clearfix">
+                                  <a href="https://hoc247.net/dai-so-tuyen-tinh/bai-1-ma-tran-l8259.html" className="scorm-document-name">
+                                    <i className="fa fa-book" /> Tài liệu bài giảng
                                   </a>
                                 </li>
-                                <li>
-                                  <a href="http://thuvienso.actvn.edu.vn/doc/ebook-viet-nam-van-minh-su-luoc-khao-tap-thuong-tu-nguon-goc-den-the-ky-thu-x-phan-1-582336.htmls">
-                                    Bài tập chương 2
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="http://thuvienso.actvn.edu.vn/doc/ebook-viet-nam-van-minh-su-luoc-khao-tap-thuong-tu-nguon-goc-den-the-ky-thu-x-phan-1-582336.htmls">
-                                    Bài tập chương 3
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="http://thuvienso.actvn.edu.vn/doc/ebook-viet-nam-van-minh-su-luoc-khao-tap-thuong-tu-nguon-goc-den-the-ky-thu-x-phan-1-582336.htmls">
-                                    Bài tập chương 4
+                                <li className="clearfix">
+                                  <a href="https://fita.vnua.edu.vn/wp-content/uploads/2019/11/BT-va-HD-OLP-DS.pdf" className="scorm-document-name">
+                                    <i className="fa fa-file" /> Bài tập tự luyện
                                   </a>
                                 </li>
                               </ul>
                             </div>
-                          </div>
-                          .
+                            <div className="slidebar-second fixsb">
+                              <div className="course-outline-head">
+                                <i className="fa fa-list" /> Đề cương
+                                <span> khóa học</span>
+                              </div>
+                              <div id="course-outline" className="clearfix">
+                                <div className="scroll-wrapper course-outline-wr">
+                                  <div id="course-outline-main" className="course-outline-wr scroll-content">
+                                    <div id="scorm-section-id-1" className="scorm-section-right">
+                                      <h3 className="section-right-name">
+                                        CHƯƠNG 1
+                                      </h3>
+                                      <div id="learn-outline-section">
+                                        <ul className="learn-outline-list ">
+                                          <li className="learn-outline-item">
+                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">
+                                              Bài 1: Giới thiệu
+                                              <div className="lesson-process-wr">
+                                              </div>
+                                            </a>
+                                          </li>
+                                          <li className="learn-outline-item">
+                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
+                                              2: Giới thiệu
+                                              <div className="lesson-process-wr">
+                                              </div>
+                                            </a>
+                                          </li>
+                                          <li className="learn-outline-item">
+                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
+                                              3: Giới thiệu
+                                              <div className="lesson-process-wr">
+                                              </div>
+                                            </a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                    <div id="scorm-section-id-2" className="scorm-section-right">
+                                      <h3 className="section-right-name">
+                                        CHƯƠNG 2
+                                      </h3>
+                                      <div id="learn-outline-section">
+                                        <ul className="learn-outline-list ">
+                                          <li className="learn-outline-item">
+                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
+                                              1: Giới thiệu
+                                              <div className="lesson-process-wr">
+                                              </div>
+                                            </a>
+                                          </li>
+                                          <li className="learn-outline-item">
+                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
+                                              2: Giới thiệu
+                                              <div className="lesson-process-wr">
+                                              </div>
+                                            </a>
+                                          </li>
+                                          <li className="learn-outline-item">
+                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
+                                              3: Giới thiệu
+                                              <div className="lesson-process-wr">
+                                              </div>
+                                            </a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                    <div id="scorm-section-id-3" className="scorm-section-right">
+                                      <h3 className="section-right-name">
+                                        CHƯƠNG 3
+                                      </h3>
+                                      <div id="learn-outline-section">
+                                        <ul className="learn-outline-list ">
+                                          <li className="learn-outline-item">
+                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
+                                              1: Giới thiệu
+                                              <div className="lesson-process-wr">
+                                              </div>
+                                            </a>
+                                          </li>
+                                          <li className="learn-outline-item">
+                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
+                                              2: Giới thiệu
+                                              <div className="lesson-process-wr">
+                                              </div>
+                                            </a>
+                                          </li>
+                                          <li className="learn-outline-item">
+                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
+                                              3: Giới thiệu
+                                              <div className="lesson-process-wr">
+                                              </div>
+                                            </a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+  {/* </div> */}
+</div>
+
+
+                       
                         </div>
-                        <div className="video container">
-                          <div className="row">
-                            <div
-                              className="col-md-4 f-play"
-                              data-toggle="modal"
-                              data-target="#myModal"
-                            >
-                              <img
-                                src={Screenshot_202329}
-                                data-target="#myModal"
-                                className="img-fluid"
-                                alt=""
-                              />
-                              <img
-                                src={Screenshot_203722}
-                                className="play-btn"
-                                data-toggle="modal"
-                                data-target="#play-video-2"
-                                width="50px"
-                                height="50px"
-                                alt=""
-                              />
-                            </div>
-                            <div
-                              className="col-md-4 f-play"
-                              data-toggle="modal"
-                              data-target="#myModal1"
-                            >
-                              <img
-                                src={Screenshot_224803}
-                                data-target="#myModal"
-                                className="img-fluid"
-                                alt=""
-                              />
-                              <img
-                                src={Screenshot_203722}
-                                className="play-btn"
-                                data-toggle="modal"
-                                data-target="#play-video-2"
-                                width="50px"
-                                height="50px"
-                                alt=""
-                              />
-                            </div>
-                            <div
-                              className="col-md-4 f-play"
-                              data-toggle="modal"
-                              data-target="#myModal2"
-                            >
-                              <img
-                                src={Screenshot_225125}
-                                data-target="#myModal"
-                                className="img-fluid"
-                                alt=""
-                              />
-                              <img
-                                src={Screenshot_203722}
-                                className="play-btn"
-                                data-toggle="modal"
-                                data-target="#play-video-2"
-                                width="50px"
-                                height="50px"
-                                alt=""
-                              />
-                            </div>
-                            <div id="myModal" className="modal fade">
-                              <div className="modal-dialog">
-                                <div className="modal-content">
-                                  <button
-                                    type="button"
-                                    className="btn btn-default"
-                                    data-dismiss="modal"
-                                  >
-                                    x
-                                  </button>
-                                  <div className="modal-body">
-                                    <div className="embed-responsive embed-responsive-16by9">
-                                      <video
-                                        controls
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                      >
-                                        <source src="./video/https___login.codepro.vn_Home_CourseScreen1_unitID=50 - Google Chrome 2020-06-17 21-49-38.mp4" />
-                                      </video>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div id="myModal1" className="modal fade">
-                              <div className="modal-dialog">
-                                <div className="modal-content">
-                                  <button
-                                    type="button"
-                                    className="btn btn-default"
-                                    data-dismiss="modal"
-                                  >
-                                    x
-                                  </button>
-                                  <div className="modal-body">
-                                    <div className="embed-responsive embed-responsive-16by9">
-                                      <video
-                                        controls
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                      >
-                                        <source src="./video/IMG_7841.MOV" />
-                                      </video>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div id="myModal2" className="modal fade">
-                              <div className="modal-dialog">
-                                <div className="modal-content">
-                                  <button
-                                    type="button"
-                                    className="btn btn-default"
-                                    data-dismiss="modal"
-                                  >
-                                    x
-                                  </button>
-                                  <div className="modal-body">
-                                    <div className="embed-responsive embed-responsive-16by9">
-                                      <video
-                                        controls
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                      >
-                                        <source src="./video/XZRR5232.MP4" />
-                                      </video>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        {/* END VIDEO */}
+                       
                         {/* END COURSE */}
                       </td>
                     </tr>
@@ -686,20 +594,19 @@ class Library extends Component {
             </h4>
             <h4 className="footer_content">
               <a id="PageFooter1_GoHome_ibnGoHome" href="../index/index.html">
-                Trang chủ
-              </a>
-              |
+                Trang chủ 
+                |
+              </a> 
+                  
               <a id="PageFooter1_SignOut_ibnLogout" href="../login/login.html">
-                Thoát
+              Thoát  | 
               </a>
-              |{" "}
-              <a
-                href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/support/default.aspx"
-                target="_blank"
-              >
-                Hỏi đáp
-              </a>
-              |{" "}
+                
+              <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/support/default.aspx"
+                target="_blank">
+                 Hỏi đáp  | 
+              </a> 
+               
               <a
                 href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/WebHelp/NewProject1.htm"
                 target="_blank"
@@ -708,7 +615,7 @@ class Library extends Component {
               </a>
             </h4>
           </div>
-          <div id="footer_2" />
+          {/* <div id="footer_2" /> */}
           <table className="footer_item">
             <tbody>
               <tr>
