@@ -29,20 +29,19 @@ public class DomainUserDetailsService implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String userId)  {
-        return accountRepository.findOneWithAuthoritiesByUserId
-                (userId)
-                .map(account -> createSpringSecurityUser(userId, account))
-                .orElseThrow(() -> new UsernameNotFoundException("User " + userId + " was not found in the database"));
+    public UserDetails loadUserByUsername(String accountName)  {
+        return accountRepository.findOneWithAuthoritiesByAccountName(accountName)
+                .map(account -> createSpringSecurityUser(accountName, account))
+                .orElseThrow(() -> new UsernameNotFoundException("User " + accountName + " was not found in the database"));
     }
 
-    private User createSpringSecurityUser(String userId, Account user){
+    private User createSpringSecurityUser(String accountName, Account user){
         if (!user.isActive()) {
-            throw new UserNotActivatedException("User " + userId + " was not activated");
+            throw new UserNotActivatedException("User " + accountName + " was not activated");
         }
         List<GrantedAuthority> grantedAuthorities = user.getRoles().stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getRoleName()))
                 .collect(Collectors.toList());
-        return new User(user.getUserId(), user.getPassword(), grantedAuthorities);
+        return new User(user.getAccountName(), user.getPassword(), grantedAuthorities);
     }
 }

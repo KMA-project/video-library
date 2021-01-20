@@ -49,14 +49,16 @@ public class TokenProvider {
     }
 
     // cấp token
+    // cấp token
     public String createToken(Authentication authentication) {
         String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
+        Date validity = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10);;
         return Jwts.builder()
                 .setSubject(authentication.getName())
                 .claim(AUTHORITIES_KEY,authorities)
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+                .setExpiration(validity)
                 .signWith(SignatureAlgorithm.HS256,secretKey)
                 .compact();
     }

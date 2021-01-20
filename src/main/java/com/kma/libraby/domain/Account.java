@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -22,8 +23,8 @@ public class Account implements Serializable {
     @Column(name = "account_id")
     private String accountId;
 
-    @Column(name = "user_id",length = 8,nullable = false)
-    private String userId;
+    @Column(name = "account_name",length = 8,nullable = false)
+    private String accountName;
 
     @Column(name = "password",length = 60,nullable = false)
     private String password;
@@ -36,12 +37,22 @@ public class Account implements Serializable {
     private boolean active;
 
     @Column(name = "created_date",updatable = false)
-    private String createdDate;
+    private Date createdDate;
 
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinTable(name="account_role",
             joinColumns = @JoinColumn(name ="account_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "createdBy")
+    @JsonIgnore
+    private Set<Course> courses;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "createdBy")
+    private Set<Video> videos;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "createdBy")
+    private Set<Document> documents;
 
 }

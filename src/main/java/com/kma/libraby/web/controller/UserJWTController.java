@@ -3,6 +3,8 @@ package com.kma.libraby.web.controller;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kma.libraby.security.jwt.JWTFilter;
 import com.kma.libraby.security.jwt.TokenProvider;
+import com.kma.libraby.service.AccountService;
+import com.kma.libraby.service.dto.AccountDTO;
 import com.kma.libraby.service.dto.LoginRequest;
 import com.kma.libraby.web.errors.ErrorConstants;
 import com.kma.libraby.web.errors.UserNotFoundException;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -31,38 +34,30 @@ public class UserJWTController {
     @Autowired
     private TokenProvider tokenProvider;
 
+    @Autowired
+    private AccountService accountService;
+
 
     @PostMapping("/auth")
-    public ResponseEntity<JWTToken> authorize(@RequestBody LoginRequest login){
+    public ResponseEntity<AccountDTO> authorize(@RequestBody LoginRequest auth){
         try{
             Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(login.getUserId(),login.getPassword())
+                    new UsernamePasswordAuthenticationToken(auth.getAccountName(),auth.getPassword())
             );
             final String jwt = tokenProvider.createToken(authentication);
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER,"Bearer "+jwt);
-            return new ResponseEntity<>(new JWTToken(jwt),httpHeaders, HttpStatus.OK);
-        }catch (Exception ex){
+            Optional<AccountDTO> userFind = accountService.getAccountByAccountName(authentication.getName());
+            if (userFind.isPresent()){
+                return new ResponseEntity<>(userFind.get(),httpHeaders,HttpStatus.OK);
+            }else {
+                throw new BadCredentialsException(ErrorConstants.BAD_CREDENTIALS);
+            }
+        }catch (Exception e){
             throw new BadCredentialsException(ErrorConstants.BAD_CREDENTIALS);
         }
     }
 
-    static class JWTToken {
 
-        private String idToken;
-
-        JWTToken(String idToken) {
-            this.idToken = idToken;
-        }
-
-        @JsonProperty("id_token")
-        String getIdToken() {
-            return idToken;
-        }
-
-        void setIdToken(String idToken) {
-            this.idToken = idToken;
-        }
-    }
 
 }
