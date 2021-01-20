@@ -1,0 +1,345 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-size: 14px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #3c8dbc;
+  }
+  
+  a:hover {
+    text-decoration: none;
+  }
+  .loading-login-page{
+    text-align: center;
+    margin-top: 20%;
+  }
+  /* HEADER */
+  .header-main {
+    background-color: #56a4fe;
+    min-height: 88px;
+    position: relative;
+    width: 100%;
+  }
+  #header {
+    background-color: #56a4fe;
+    width: 100%;
+    min-height: 88px;
+    position: relative;
+  }
+  .school_name {
+    font-family: -webkit-body;
+    position: absolute;
+    color: white;
+    font-size: 18px;
+    top: 32px;
+    font-weight: bold;
+    left: 8px;
+  }
+  
+  #navbar {
+    font-size: 13px;
+    color: white;
+    padding: 5px 5px 5px 5px;
+    background-color: #56a4fe;
+    top: 89px;
+    right: 0px;
+    position: absolute;
+    font-weight: bold;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  
+  #navbar a {
+    color: #fff;
+  }
+  
+  #navbar a:hover {
+    color: Blue;
+  }
+  
+  #box_user {
+    position: absolute;
+    width: 406px;
+    height: 28px;
+    right: 0;
+    font-size: 12px;
+    border-bottom-left-radius: 75px;
+    background-color: White;
+    color: blue;
+  }
+  #box_user p {
+    text-align: right;
+    width: 400px;
+    margin-top: 2px;
+  }
+  
+  /* END HEADER */
+  
+  /* NAVBAR */
+  .container-home {
+    width: 100%;
+    display: block;
+    margin: 25px 0 0 0;
+  }
+  
+  .left-home {
+    width: 25%;
+    float: left;
+    min-height: 500px;
+    margin: 0px;
+  }
+  #left {
+    z-index: 500;
+    margin-top: 10px;
+    width: 100%;
+    float: left;
+    margin-left: 4px;
+  }
+  .slidebar {
+    padding-bottom: 10px;
+  }
+  .sidebar-menu,
+  .main-sidebar .user-panel,
+  .sidebar-menu > li.header {
+    white-space: nowrap !important;
+    overflow: hidden;
+  }
+  .sidebar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .sidebar-menu > li {
+    position: relative;
+    margin: 0;
+  }
+  .sidebar-menu li.header {
+    padding: 10px 25px 10px 15px;
+    font-size: 12px;
+  }
+  .skin-green-light .sidebar-menu > li.header {
+    color: #848484;
+    background: #f9fafc;
+  }
+  .skin-green-light .sidebar-menu > li > a {
+    border-left: 3px solid transparent;
+    font-weight: 600;
+  }
+  .skin-green-light .sidebar a {
+    color: #444;
+  }
+  .sidebar-menu li > a {
+    position: relative;
+    text-decoration: none;
+  }
+  .sidebar-menu > li > a {
+    padding: 12px 5px 12px 15px;
+    display: block;
+  }
+  .sidebar-form,
+  .sidebar-menu > li.header {
+    overflow: hidden;
+    text-overflow: clip;
+  }
+  
+  .skin-green-light .sidebar-menu > li > .dropdown-menu {
+    background: #f4f4f5;
+  }
+  .sidebar-menu li > a > .pull-right {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -7px;
+  }
+  .sidebar-menu li > a > .fa-angle-left {
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin-right: 10px;
+  }
+  .sidebar-menu li.active > a > .fa-angle-left {
+    transform: rotate(-90deg);
+  }
+  .sidebar-menu .dropdown-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding-left: 5px;
+  }
+  .sidebar-menu .dropdown-menu > li {
+    margin: 0;
+  }
+  .skin-green-light .dropdown-menu > li > a {
+    color: #777;
+  }
+  .sidebar-menu .dropdown-menu > li > a {
+    padding: 5px 5px 5px 15px;
+    display: block;
+    font-size: 14px;
+  }
+  .skin-green-light .dropdown-menu > li > a:hover {
+    color: #000;
+  }
+  .skin-green-light .sidebar-menu > li > a {
+    border-left: 3px solid transparent;
+  }
+  .skin-green-light .sidebar a:hover {
+    text-decoration: none;
+    background-color: #0072bc !important;
+  }
+  .dropdown-menu {
+    width: 100%;
+    border: none;
+  }
+  
+  .dropdown-toggle::after {
+    display: none;
+  }
+  .dropdown-item {
+    width: 100%;
+    padding: 3px 0px;
+  }
+  
+  #tblMain {
+    margin-top: 150px;
+    margin-bottom: 150px;
+  }
+  
+  #boxlogin-t {
+    background-image: url("../../assets/img/formLogin.png");
+    background-repeat: no-repeat;
+    height: 88px;
+    width: 500px;
+  }
+  
+  .tableborderLogin {
+    border-left: solid 3px #fea700;
+    border-right: solid 3px #fea700;
+    border-bottom: solid 3px #fea700;
+    border-bottom-left-radius: 13px;
+    border-bottom-right-radius: 13px;
+    padding: 25px 0;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  }
+  
+  #Table2 .labelheader {
+    color: dimgray;
+    font-weight: bold;
+  }
+  
+  .footerFormLogin {
+    background: url("../../assets/img/endFormLogin.png");
+    height: 100px;
+    margin-bottom: 200px;
+    background-repeat: no-repeat;
+    background-position-x: center;
+  }
+  
+  /*
+  .formLogin {
+    padding-top: 245px;
+    text-align: center;
+  }
+  
+  .form-group label {
+    color: dimgray;
+    font-weight: bold;
+  }
+  
+  .form-group input {
+    border-radius: 5px;
+    width: 140px;
+  }
+  
+  #pwd {
+    margin-left: 4px;
+    margin-bottom: 4px;
+  }
+  
+  .button a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .forgotPassword a {
+    text-decoration: none;
+    color: #0066cc;
+    font-weight: bold;
+  }
+  
+  .forgotPassword a:hover {
+    color: blue;
+  }
+  */
+  
+  /* FOOTER */
+  .footer {
+    float: left;
+    margin-top: 60px;
+    width: 100%;
+  }
+  #footer_1 {
+    background-color: #56a4fe;
+    width: 100%;
+    min-height: 75px;
+    position: relative;
+    padding: 10px 0 0 8px;
+    color: White;
+    left: 0;
+    text-align: left;
+  }
+  #hotline {
+    padding: 6px 0 0 0px;
+    color: White;
+    font-size: 12px;
+    position: relative;
+    
+    float: left;
+    font-weight: bold;
+  }
+  .footer_content {
+    font-size: 12px;
+    right: 11px;
+    position: absolute;
+    top: 20px;
+    font-weight: bold;
+  }
+  .footer_content a {
+    color: white;
+  }
+  .footer_item {
+    text-align: center;
+    background-color: white;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .footer_icon {
+    float: left;
+  }
+  .footer_icon img {
+    border: 0;
+  }
+  .footer_left {
+    float: left;
+    padding-top: 6px;
+  }
+  .footer_left:hover {
+    color: #72afd2;
+  }
+  
+  #footer_2 {
+    background: url("../../assets/img/footer.png");
+    height: 40px;
+    background-repeat: no-repeat;
+  }
+  

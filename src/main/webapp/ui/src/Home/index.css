@@ -1,0 +1,185 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+  }
+  
+  .topHeader {
+    width: 980px;
+    height: 130px;
+    margin: auto;
+  }
+  
+  .headerNav {
+    list-style: none;
+    margin: 0px auto;
+    padding-top: 10px;
+    width: 978px;
+    border-top: 3px solid #dd7923;
+    border-bottom: 5px solid #d1cccc;
+    border-left: 1px solid #d1cccc;
+    border-right: 1px solid #d1cccc;
+    background-color: white;
+  }
+  
+  .headerNav ul li {
+    display: inline;
+  }
+  
+  .headerNav ul li a {
+    text-decoration: none;
+    color: #60585c;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-right: 1px solid #d9dbdd;
+    padding: 10px !important;
+  }
+  
+  .headerNav ul li a:hover {
+    background-color: #b6aab03d;
+    cursor: pointer;
+  }
+  
+  /* BODY */
+  .page {
+    width: 980px;
+    height: auto;
+    float: inherit;
+    text-align: left;
+    vertical-align: top;
+    margin: 3px auto;
+    clear: both;
+  }
+  
+  .page-left {
+    width: 650px;
+    float: left;
+    text-align: left;
+    margin-bottom: 10px;
+    padding-left: 1px;
+    position: absolute;
+  }
+  
+  .carousel-item img {
+    width: 650px;
+  }
+  
+  .page-right {
+    width: 308px;
+    float: right;
+    padding-left: -1px;
+    background-color: white;
+  }
+  
+  .content-link {
+    background-image: linear-gradient(to right, #1d6bb5, #52beeb);
+    height: 55px;
+    margin-left: -15px;
+    margin-bottom: 4px;
+    width: 322px;
+    padding-top: 15px;
+  }
+  
+  .content-link a {
+    color: white;
+    text-transform: uppercase;
+    font-size: 17px;
+    padding-top: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .online {
+    border-right: 3px solid white;
+  }
+  
+  .library {
+    margin-left: -17px !important;
+  }
+  
+  
+  .newNotification {
+    margin-left: -20px;
+  }
+  
+  /* FOOTER  */
+  .footer {
+    width: 100%;
+    float: left;
+    height: 100px;
+    text-align: left;
+    /* background-color: #007c7c; */
+    min-height: 100px;
+    margin: auto;
+    margin-top: 100px;
+  }
+  
+  .footertMain {
+    width: 980px;
+    float: inherit;
+    text-align: left;
+    vertical-align: top;
+  }
+  
+  .divttbanquyen {
+    width: 440px;
+    float: left;
+    height: 100%;
+    color: white;
+    padding-top: 20px;
+    margin-left: 140px;
+  }
+  
+  .divmenu {
+    float: right;
+    width: 480px;
+    border-left: 1px solid #f6f2f2;
+    padding-left: 5px;
+    min-height: 100px;
+  }
+  
+  .socialName {
+    color: white;
+    padding-top: 23px;
+    font-weight: bold;
+  }
+  
+  .socialIcon {
+    padding-top: 3px;
+  }
+  
+  .footerLast {
+    width: 100%;
+    float: left;
+    height: 55px;
+    text-align: left;
+    background-color: #0f5658;
+    min-height: 55px;
+  }
+  
+  .footertMain {
+    margin: 0px;
+    padding: 0px;
+    width: 980px;
+    float: inherit;
+    text-align: left;
+    vertical-align: top;
+    display: inline;
+  }
+  
+  .footerMainLeft {
+    margin-left: 140px;
+  }
+  
+  .footerMainLeft a {
+    color: white;
+    text-decoration: none;
+    padding-right: 3px;
+  }
+  
