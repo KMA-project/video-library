@@ -1,5 +1,6 @@
 package com.kma.libraby.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,7 @@ public class Role implements Serializable {
     private String roleName;
 
     @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
-    private List<Account> users;
+    @JsonIgnore
+    private List<Account> accounts;
 
 }
