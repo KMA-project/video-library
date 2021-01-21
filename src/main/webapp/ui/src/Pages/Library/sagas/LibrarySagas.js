@@ -13,7 +13,7 @@ function* handleGetCoursesRequest(action) {
 
     } catch (error) {
         // console.log("reached", error);
-        yield put(LibraryActions.getCoursesError(action.payload));
+        yield put(LibraryActions.getCoursesError(error));
     }
 }
 

@@ -19,7 +19,7 @@ function* handleLoginAccountRequest(action) {
 
     } catch (error) {
         console.log("reached", error);
-        yield put(LoginActions.loginAccountError(action.payload));
+        yield put(LoginActions.loginAccountError(error));
     }
 }
 

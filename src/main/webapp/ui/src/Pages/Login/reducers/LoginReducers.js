@@ -23,7 +23,8 @@ const loginReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                isAuthenticated: false
+                isAuthenticated: false,
+                error: action.payload
             };
         default:
             return state;
