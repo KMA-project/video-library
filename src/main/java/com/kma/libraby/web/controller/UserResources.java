@@ -1,7 +1,7 @@
 package com.kma.libraby.web.controller;
 
-import com.kma.libraby.service.UserService;
-import com.kma.libraby.service.dto.UserDTO;
+import com.kma.libraby.service.AccountService;
+import com.kma.libraby.service.dto.AccountDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +15,10 @@ import java.util.List;
 public class UserResources {
 
     @Autowired
-    UserService userService;
+    AccountService accountService;
 
-    @GetMapping("/users")
-    public ResponseEntity<List<UserDTO>> getUsers(){
-        return ResponseEntity.ok(userService.getUsers());
-    }
+//    @GetMapping("/users")
+//    public ResponseEntity<List<AccountDTO>> getUsers(){
+//        return ResponseEntity.ok(accountService.getUsers());
+//    }
 }

@@ -2,8 +2,10 @@ import { all, fork } from "redux-saga/effects";
 import { flatten } from 'lodash/array';
 import { values } from 'lodash/object';
 import LoginSaga from "../Pages/Login/sagas/LoginSagas";
+import LibrarySaga from "../Pages/Library/sagas/LibrarySagas";
 const sagaList = [
-    LoginSaga
+    LoginSaga,
+    LibrarySaga
 ]
 
 export default function* () {

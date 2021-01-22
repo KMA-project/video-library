@@ -54,7 +54,7 @@ class Login extends Component {
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } };
     const token = sessionStorage.getItem("token_id"); 
-    const { isLoading } = this.props.stateOfLoginReducer;
+    const { isLoading, error } = this.props.stateOfLoginReducer;
     if(isLoading) return <div className="loading-login-page">...Loading</div>
     if(token) return <Redirect from={from} to={"/library"} />;
     return (
@@ -177,7 +177,7 @@ class Login extends Component {
                                 <div className="form-control">
                                     <button type="submit">Đăng nhập</button>
                                     <button type="button" style={{marginLeft: "1rem"}}>Về trang chủ</button>
-                                    <span style={{color: "red", display: "block", fontSize: "14px"}}>{this.state.err}</span>
+                                    <span style={{color: "red", display: "block", fontSize: "14px"}}>{error && "Bạn đã nhập sai tài khoản hoặc mật khẩu!"}</span>
                                 </div>
                               </form>
                             </td>

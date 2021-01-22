@@ -26,14 +26,16 @@ public class LibrabyApplication {
         return modelMapper;
     }
 
-    @Bean //Cros config
+    @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/auth").allowedOrigins("http://localhost:3000");
+                registry.addMapping("/api/**")
+                        .exposedHeaders("Authorization");
             }
         };
     }
+
 
 }
