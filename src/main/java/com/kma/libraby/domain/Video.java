@@ -21,11 +21,14 @@ public class Video {
     @Column(name = "video_id")
     private int videoId;
 
-    @Column(name = "video_name",nullable = false,length = 150)
-    private String videoName;
+    @Column(name = "title_name",nullable = false,length = 150)
+    private String titleName;
 
-    @Column(name = "video_url")
-    private String videoUrl;
+    @Column(name = "url_name")
+    private String urlName;
+
+    @Column(name = "addedBy",length = 37)
+    private String addedBy;
 
     @Column(name = "created_date",updatable = false)
     private Date createdDate;
@@ -37,8 +40,8 @@ public class Video {
     @JsonIgnore
     private Course belong_to;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "created_by")
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @JoinColumn(name = "lesson_id")
     @JsonIgnore
-    private Account createdBy;
+    private Lesson lessonId;
 }

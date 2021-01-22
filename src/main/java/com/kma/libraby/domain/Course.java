@@ -46,4 +46,8 @@ public class Course implements Serializable {
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "belong_to")
     private Set<Document> documents;
 
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "course")
+    private Set<Lesson> lessons;
+
+
 }
