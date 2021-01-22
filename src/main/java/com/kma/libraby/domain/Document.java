@@ -27,7 +27,8 @@ public class Document {
     @Column(name = "document_url",nullable = false,length = 100)
     private String documentUrl;
 
-    private int lesson;
+    @Column(name = "addedBy",length = 37)
+    private String addedBy;
 
     @Column(name = "created_date",updatable = false)
     private Date createdDate;
@@ -40,7 +41,7 @@ public class Document {
     private Course belong_to;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "created_by")
+    @JoinColumn(name = "lesson_id")
     @JsonIgnore
-    private Account createdBy;
+    private Lesson lessonId;
 }

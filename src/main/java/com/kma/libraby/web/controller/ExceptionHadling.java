@@ -1,6 +1,7 @@
 package com.kma.libraby.web.controller;
 
 import com.kma.libraby.service.dto.ErrorResponse;
+import com.kma.libraby.web.errors.BadRequestAlertException;
 import com.kma.libraby.web.errors.NotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,13 @@ public class ExceptionHadling extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleNotFoundException(RuntimeException ex,WebRequest request){
         String path = ((ServletWebRequest)request).getRequest().getRequestURI();
         ErrorResponse error = new ErrorResponse(HttpStatus.NO_CONTENT.value(),ex.getMessage(),path);
+        return handleExceptionInternal(ex,error,new HttpHeaders(),HttpStatus.BAD_REQUEST,request);
+    }
+
+    @ExceptionHandler(value = {BadRequestAlertException.class})
+    protected ResponseEntity<Object> handleBadRequestAlertException(RuntimeException ex,WebRequest request){
+        String path = ((ServletWebRequest)request).getRequest().getRequestURI();
+        ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(),ex.getMessage(),path);
         return handleExceptionInternal(ex,error,new HttpHeaders(),HttpStatus.BAD_REQUEST,request);
     }
 }

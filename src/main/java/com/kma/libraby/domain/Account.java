@@ -23,13 +23,13 @@ public class Account implements Serializable {
     @Column(name = "account_id")
     private String accountId;
 
-    @Column(name = "account_name",length = 8,nullable = false)
+    @Column(name = "account_name",length = 8)
     private String accountName;
 
-    @Column(name = "password",length = 60,nullable = false)
+    @Column(name = "password",length = 60)
     private String password;
 
-    @Column(name = "full_name",length = 45,nullable = false)
+    @Column(name = "full_name",length = 45)
     private String fullName;
 
     private String sex;
@@ -48,11 +48,5 @@ public class Account implements Serializable {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "createdBy")
     @JsonIgnore
     private Set<Course> courses;
-
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "createdBy")
-    private Set<Video> videos;
-
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "createdBy")
-    private Set<Document> documents;
 
 }
