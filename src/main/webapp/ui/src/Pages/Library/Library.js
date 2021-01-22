@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
 import "./Click.js";
 import "./Library.css";
+import { connect } from "react-redux";
+import { getCoursesRequest } from "./actions/LibraryActions";
 import Viewpost_Image from "../../assets/img/viewpost.gif";
 import Screenshot_202329 from "../../assets/img/Screenshot 2020-11-18 202329.png";
 import Screenshot_203722 from "../../assets/img/Screenshot 2020-11-18 203722.png";
@@ -11,8 +13,21 @@ import SendEmail from "../../assets/img/sendemail.png";
 import Print from "../../assets/img/print.png";
 import AddToFavorites from "../../assets/img/addtofavorites.png";
 class Library extends Component {
-  
+
+  componentDidMount = () => {
+    this.props.getCoursesRequest();
+  }
+
+ renderCourse = (year) => {
+  const { courses } = this.props.stateOfLibraryReducers;
+    return courses.map((item) => {
+      if(item.gradeYear === year) 
+      return <li key={item.courseId} style={{width: "33.33%"}}><a>{item.courseName}</a></li>
+    })
+ }
   render() {
+    const { courses } = this.props.stateOfLibraryReducers;
+    console.log(this.props.stateOfLibraryReducers)
     return (
       <Fragment>
         <header className="header-main">
@@ -110,123 +125,78 @@ class Library extends Component {
             <div id="left">
               <div className="skin-green-light sidebar-mini">
                 <div id="Menu1_div_nav_menu" className="sidebar dropdown">
-                  <ul className="sidebar-menu">
-                    <li className="header">DANH MỤC CHÍNH</li>
-                    <li>
-                      {" "}
-                      <a
-                        id="dropdownMenuLink"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <i className="fa fa-laptop" />
-                        <span>Đăng ký học</span>
-                        <i className="fa fa-angle-left pull-right" />
-                      </a>
-                      <ul className="dropdown-menu">
-                        <li className="dropdown-item">
-                          <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/CourseByFieldTree.aspx">
-                            Xem chương trình học
-                          </a>
-                        </li>
-                        <li className="dropdown-item">
-                          <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.info/StudyRegister/StudyRegister.aspx">
+                  <div className="widget-title">
+                    <h1>Danh mục chính</h1>
+                  </div>
+                  <ul className="menu">
+                      <li>
+                        <a>
+                          <i className="fa fa-laptop"></i>
+                          <span>
                             Đăng ký học
-                          </a>
+                          </span>
+                          <i className="fa fa-angle-left"></i>
+                        </a>
+                      </li>
+                      <li><a>Home</a></li>
+                      <li>
+                      <a><i className="fa fa-laptop"></i>Khóa học</a>
+                      <ul className="sub-menu">
+                      <li>
+                        <a>Sinh vien năm nhất</a>
+                        <ul className="nested-sub-menu">
+                          {this.renderCourse(1)}
+                        </ul>
+                      </li>
+                      <li>
+                          <a>Sinh vien năm hai</a>
+                          <ul className="nested-sub-menu">{this.renderCourse(2)}</ul>
+                      </li>
+                      <li>
+                        <a>Sinh vien năm ba</a>
+                        <ul className="nested-sub-menu">{this.renderCourse(3)}</ul>
+                      </li>
+                      <li>
+                        <a>Sinh vien năm cuối</a>
+                        <ul className="nested-sub-menu">{this.renderCourse(4)}</ul>
+                      </li>
+                    </ul>
+                      </li>
+                      <li>
+                        <a>
+                          <i className="fa fa-laptop"></i>
+                          <span>
+                              Quản lý mật khẩu
+                          </span>
+                          <i className="fa fa-angle-left"></i>
+                        </a>
+                        <ul className="sub-menu">
+                          <li><a>Sub menu</a></li>
+                          <li><a>Sub menu</a></li>
+                          <li><a>Sub menu</a></li>
+                          <li><a>Sub menu</a></li>
+                        </ul>
+                      </li>
+                      <li>
+                        <a>
+                        <i className="fa fa-laptop"></i>
+                          <span>
+                            Thông tin cá nhân
+                          </span>
+                        <i className="fa fa-angle-left"></i>
+                        </a>
+                          <ul className="sub-menu">
+                            <li><a>Sub menu</a></li>
+                            <li><a>Sub menu</a></li>
+                            <li><a>Sub menu</a></li>
+                            <li><a>Sub menu</a></li>
+                          </ul>
+                      </li>
+                      <li>
+                        <a>
+                          Thanh toán online
+                        </a>
                         </li>
-                        <li className="dropdown-item">
-                          <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/Reports/Form/StudentTimeTable.aspx">
-                            Xem kết quả ĐKH
-                          </a>
-                        </li>
-                        <li className="dropdown-item">
-                          <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/StudyRegister/RegistrationHistory.aspx">
-                            Xem quá trình ĐKH
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href="/CMCSoft.IU.Web.Info/Home.aspx">
-                        <span>Home</span>
-                      </a>
-                    </li>
-                    <li id="btn-video">
-                      {" "}
-                      <a>
-                        <i className="fa fa-laptop" />
-                        <span> Thư viện video </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        id="dropdownMenuLink"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <i className="fa fa-laptop" />
-                        <span> Quản lý mật khẩu</span>
-                        <i className="fa fa-angle-left pull-right" />
-                      </a>
-                      <ul className="dropdown-menu">
-                        <li className="dropdown-item">
-                          <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.info/ChangePassWordStudent.aspx">
-                            Đổi mật khẩu
-                          </a>
-                        </li>
-                        <li className="dropdown-item">
-                          <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/EmailRegistration.aspx">
-                            Đăng ký Email lấy lại mật khẩu
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a
-                        id="dropdownMenuLink"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <i className="fa fa-laptop" />
-                        <span> Thông tin cá nhân </span>
-                        <i className="fa fa-angle-left pull-right" />
-                      </a>
-                      <ul className="dropdown-menu">
-                        <li className="dropdown-item">
-                          <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/StudentService/StudentTuition.aspx">
-                            Xem lệ phí - học phí
-                          </a>
-                        </li>
-                        <li className="dropdown-item">
-                          <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/StudentViewExamList.aspx">
-                            Xem lịch thi cá nhân
-                          </a>
-                        </li>
-                        <li className="dropdown-item">
-                          <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.info/StudentMark.aspx">
-                            Tra cứu điểm
-                          </a>
-                        </li>
-                        <li className="dropdown-item">
-                          <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/StudentService/PractiseMarkAndStudyWarning.aspx">
-                            Tra cứu điểm rèn luyện và xử lý học vụ
-                          </a>
-                        </li>
-                        <li className="dropdown-item">
-                          <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/StudentProfileNew/HoSoSinhVien.aspx">
-                            Thông tin hồ sơ sinh viên
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/PaymentOnline/hocPhi.aspx">
-                        <span>Thanh toán Online</span>
-                      </a>
-                    </li>
                   </ul>
                 </div>
               </div>
@@ -651,4 +621,16 @@ class Library extends Component {
   }
 }
 
-export default Library;
+const mapStateToProps = (state) => {
+  return {
+    stateOfLibraryReducers: state.getCoursesReducer
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCoursesRequest: () => dispatch(getCoursesRequest())
+  }
+} 
+
+export default connect(mapStateToProps, mapDispatchToProps)(Library);
