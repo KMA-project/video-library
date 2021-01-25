@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "./Click.js";
 import "./Library.css";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getCoursesRequest } from "./actions/LibraryActions";
 import Screenshot_202329 from "../../assets/img/Screenshot 2020-11-18 202329.png";
@@ -16,26 +17,41 @@ import TableCourse from "./components/TableCourse.js";
 import MyCourse from "./components/MyCourse.js";
 import Content from "./components/Content.js";
 
+const renderCourseData = ["/my_course", "", "/course_management", ""]
 class Library extends Component {
 
   componentDidMount = () => {
     this.props.getCoursesRequest();
   }
 
- renderCourse = (year) => {
+ renderCourse = (year, link_name) => {
   const { courses } = this.props.stateOfLibraryReducers;
-    return courses.map((item) => {
-      if(item.gradeYear === year) 
-      return <li key={item.courseId} style={{width: "33.33%"}}><a>{item.courseName}</a></li>
-    })
- }
+    return courses.map((item, index) => {
+      if(item.gradeYear === year )
+        return <li key={item.courseId} style={{width: "33.33%"}}>
+        <Link to={link_name}>{item.courseName}</Link>
+        </li>
+      })
+    }
+
+  switchLink = (item, index) => {
+    switch(renderCourseData[index]) {
+      case "/my_course":
+        return <Link to="/my_course">{item.courseName}</Link>
+      case "/course_management":      
+        return <Link to="/course_management">{item.courseName}</Link>
+      default:
+        return <a>{item.courseName}</a>
+    }
+  }
+
   render() {
     const { courses } = this.props.stateOfLibraryReducers;
     console.log(this.props.stateOfLibraryReducers)
     return (
       <Fragment>
         <header className="header-main">
-          <div id="header">
+          <div id="header"> 
             <div className="school_name">
               <span id="PageHeader1_lblWebtitle">HỌC VIỆN KỸ THUẬT MẬT MÃ</span>
             </div>
@@ -149,20 +165,20 @@ class Library extends Component {
                       <li>
                         <a>Năm 1</a>
                         <ul className="nested-sub-menu">
-                          {this.renderCourse(1)}
+                          {this.renderCourse(1, "/my_course")}
                         </ul>
                       </li>
                       <li>
                           <a>Năm 2</a>
-                          <ul className="nested-sub-menu">{this.renderCourse(2)}</ul>
+                          <ul className="nested-sub-menu">{this.renderCourse(2, "/my_course")}</ul>
                       </li>
                       <li>
                         <a>Năm 3</a>
-                        <ul className="nested-sub-menu">{this.renderCourse(3)}</ul>
+                        <ul className="nested-sub-menu">{this.renderCourse(3, "/my_course")}</ul>
                       </li>
                       <li>
                         <a>Năm 4</a>
-                        <ul className="nested-sub-menu">{this.renderCourse(4)}</ul>
+                        <ul className="nested-sub-menu">{this.renderCourse(4, "/my_course")}</ul>
                       </li>
                     </ul>
                       </li>
@@ -190,22 +206,22 @@ class Library extends Component {
                         <ul className="sub-menu">
                           <li><a>Năm 1</a>
                             <ul className="nested-sub-menu">
-                            {this.renderCourse(1)}
+                            {this.renderCourse(1, "/course_management")}
                             </ul>
                           </li>
                           <li><a>Năm 2</a>
                             <ul className="nested-sub-menu">
-                            {this.renderCourse(2)}
+                            {this.renderCourse(2, "/course_management")}
                             </ul>
                           </li>
                           <li><a>Năm 3</a>
                             <ul className="nested-sub-menu">
-                            {this.renderCourse(3)}
+                            {this.renderCourse(3, "/course_management")}
                             </ul>
                           </li>
                           <li><a>Năm 4</a>
                             <ul className="nested-sub-menu">
-                            {this.renderCourse(4)}
+                            {this.renderCourse(4, "/course_management")}
                             </ul>
                           </li>
                        </ul>
@@ -271,26 +287,12 @@ class Library extends Component {
                               </span>
                             </span>
                           </h4>
-                          {/* CONTENT */}
-                            <Content />
-                          {/* END */}
-
-                          {/* COURSE*/}
-                          <MyCourse />
-
-                          {/* COURSEMANAGEMENT */}
-                          <div className="courseManagement">
-                          
-                            {/* <CourseManagement />       
-                            <CourseManagement />    
-                            <CourseManagement />   */}
-                            </div>
+                                  {this.props.children}
                             </div>
                        
                         {/* END COURSE */}
 
                         {/* table course */}
-                          <TableCourse />
                         {/* end */}
 
                       </td>
