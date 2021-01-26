@@ -28,26 +28,33 @@ class Library extends Component {
   const { courses } = this.props.stateOfLibraryReducers;
     return courses.map((item, index) => {
       if(item.gradeYear === year )
-        return <li key={item.courseId} style={{width: "33.33%"}}>
-        <Link to={link_name}>{item.courseName}</Link>
-        </li>
+        switch (link_name) {
+          case "/my_course":
+            return <li key={item.courseId} style={{width: "33.33%"}}><Link to="/my_course">{item.courseName}</Link></li>
+  
+          case "/course_management":
+            return <li key={item.courseId} style={{width: "33.33%"}}><Link to={`/course_management/${item.courseId}`}>{item.courseName}</Link></li> 
+          default:
+            return <li key={item.courseId} style={{width: "33.33%"}}><Link to="">{item.courseName}</Link></li>
+            break;
+        }
       })
     }
 
-  switchLink = (item, index) => {
-    switch(renderCourseData[index]) {
-      case "/my_course":
-        return <Link to="/my_course">{item.courseName}</Link>
-      case "/course_management":      
-        return <Link to="/course_management">{item.courseName}</Link>
-      default:
-        return <a>{item.courseName}</a>
-    }
-  }
+  // switchLink = (item, index) => {
+  //   switch(renderCourseData[index]) {
+  //     case "/my_course":
+  //       return <Link to="/my_course">{item.courseName}</Link>
+  //     case "/course_management":      
+  //       return <Link to="/course_management">{item.courseName}</Link>
+  //     default:
+  //       return <a>{item.courseName}</a>
+  //   }
+  // }
 
   render() {
-    const { courses } = this.props.stateOfLibraryReducers;
-    console.log(this.props.stateOfLibraryReducers)
+    // const { courses } = this.props.stateOfLibraryReducers;
+    // console.log(this.props.stateOfLibraryReducers)
     return (
       <Fragment>
         <header className="header-main">

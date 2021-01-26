@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "http://7be023821101.ngrok.io/api";
+const url = "http://1ef33c2b9c56.ngrok.io/api";
 const backUp = "https://5dc9138dd53a7d00149cebd0.mockapi.io/api"; 
 export default function callAPI(
   endpoint,
@@ -20,7 +20,7 @@ export default function callAPI(
        data: body,
      })
        .then(response => {
-         console.log(response);
+        //  console.log(response);
          resolve(response);
        })
        .catch(error => {
