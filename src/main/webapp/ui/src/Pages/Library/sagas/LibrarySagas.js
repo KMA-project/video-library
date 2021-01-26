@@ -6,7 +6,6 @@ import * as LibraryApis from "../apis/LibraryApis";
 function* handleGetCoursesRequest(action) {
     try {
         const {headers, data, statusText} = yield call(LibraryApis.getCourses); 
-        // console.log(data);
         // if (statusText === "OK") {
             yield put(LibraryActions.getCoursesSuccess(data));
         // }

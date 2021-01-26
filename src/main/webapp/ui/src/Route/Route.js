@@ -3,6 +3,9 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import App from "../App";
 import Login from "../Pages/Login/Login";
 import Library from "../Pages/Library/Library";
+import MyCourse from "../Pages/Library/components/MyCourse";
+import TableCourse from "../Pages/Library/components/TableCourse";
+import Content from "../Pages/Library/components/Content";
 import ScrollTopAndPrivateRoute from "./ScrollTopAndPrivateRoute";
 // import { AnimatedSwitch, spring } from "react-router-transition";
 // const Account = lazy(() => import("../modules/Account/Account"));
@@ -21,9 +24,23 @@ import ScrollTopAndPrivateRoute from "./ScrollTopAndPrivateRoute";
 const RouterIndex = (
   <BrowserRouter>
     <Switch>
-          <Route exact path="/"  component={App} />
-          <Route exact path="/login"  component={Login} />
-          <ScrollTopAndPrivateRoute exact path="/library" component={Library}/>
+      {/*
+    
+      <Route exact path="/library" component={Library} />
+    */}
+      <Route exact path="/" component={App} />
+      <Route exact path="/login" component={Login} />
+
+      <Library>
+        <Route exact path="/library" component={Content} />
+
+        <Route exact path="/my_course" component={MyCourse} />
+        <Route exact path="/course_management" component={TableCourse} />
+      </Library>
+
+        
+        <Route component={() => <h1>No Found 404</h1>} />
+
     </Switch>
   </BrowserRouter>
 );
