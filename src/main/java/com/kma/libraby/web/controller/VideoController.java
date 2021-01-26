@@ -6,6 +6,7 @@ import com.kma.libraby.service.VideoStreamService;
 import com.kma.libraby.service.dto.ui.VideoUploadDTO;
 import com.kma.libraby.web.errors.BadRequestAlertException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Optional;
 
 
 @RestController
@@ -29,20 +31,12 @@ public class VideoController {
         return Mono.just(videoStreamService.prepareContent(fileName, fileType, httpRangeList));
     }
 
-    @PostMapping("/videos")//Add new News
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PostMapping("/videos")//Add new Video
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Video> saveCategory(@ModelAttribute VideoUploadDTO videoUploadDTO) throws URISyntaxException {
         if (videoUploadDTO.getVideoId() != 0) {
             throw new BadRequestAlertException(String.valueOf(videoUploadDTO.getVideoId()));
         }
-//        if (newsService.isMainNews(Integer.parseInt(newsUploadDTO.getCategoryId())).isPresent() &&
-//                newsUploadDTO.getMainNews().equals("true") ){
-//            throw new ExistMainNewsException(ErrorConstants.EXIST_MAIN_NEWS);
-//        }
-//        if (Integer.parseInt(newsUploadDTO.getCategoryId()) == 0 &&
-//                Integer.parseInt(newsUploadDTO.getMenuId()) == 0){
-//            throw new NullException("Category and Menu");
-//        }
         else {
             Video newVideo = videoStreamService.addVideo(videoUploadDTO);
             return ResponseEntity.created(
@@ -51,4 +45,31 @@ public class VideoController {
         }
     }
 
+    @PutMapping("/videos")//Update Video existing in database
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Video> updateCategory(@ModelAttribute VideoUploadDTO videoUploadDTO) throws URISyntaxException {
+        if (videoUploadDTO.getVideoId() == 0) {
+            throw new BadRequestAlertException(String.valueOf(videoUploadDTO.getVideoId()));
+        }
+        Optional<Video> videoUpdate = videoStreamService.updateVideo(videoUploadDTO);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(new URI(ApplicationConstants.BASE_URL+"/news/"+videoUploadDTO.getVideoId()));
+        if (videoUpdate.isEmpty()){
+            return ResponseEntity.noContent().headers(headers).build();
+        }else {
+            return ResponseEntity.ok(videoUpdate.get());
+        }
+    }
+
+    @PutMapping("/videos/{videoId}") //Update video status:localhost:3000/api/news/13/?status=true
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> updateNewsStatus(
+            @PathVariable("videoId")  int newsId,
+            @RequestParam("active") String active
+    ) throws URISyntaxException {
+        videoStreamService.updateVideoStatus(newsId,Boolean.parseBoolean(active));
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(new URI(ApplicationConstants.BASE_URL+"/news/"+newsId+"active?"+active));
+        return ResponseEntity.noContent().headers(headers).build();
+    }
 }

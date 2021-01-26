@@ -3,7 +3,6 @@ import "./Click.js";
 import "./Library.css";
 import { connect } from "react-redux";
 import { getCoursesRequest } from "./actions/LibraryActions";
-import Viewpost_Image from "../../assets/img/viewpost.gif";
 import Screenshot_202329 from "../../assets/img/Screenshot 2020-11-18 202329.png";
 import Screenshot_203722 from "../../assets/img/Screenshot 2020-11-18 203722.png";
 import Screenshot_224803 from "../../assets/img/Screenshot 2020-11-18 224803.png";
@@ -12,6 +11,11 @@ import Screenshot_225125 from "../../assets/img/Screenshot 2020-11-18 225125.png
 import SendEmail from "../../assets/img/sendemail.png";
 import Print from "../../assets/img/print.png";
 import AddToFavorites from "../../assets/img/addtofavorites.png";
+import CourseManagement from "./components/CourseManagement.js";
+import TableCourse from "./components/TableCourse.js";
+import MyCourse from "./components/MyCourse.js";
+import Content from "./components/Content.js";
+
 class Library extends Component {
 
   componentDidMount = () => {
@@ -143,21 +147,21 @@ class Library extends Component {
                       <a><i className="fa fa-laptop"></i>Khóa học</a>
                       <ul className="sub-menu">
                       <li>
-                        <a>Sinh vien năm nhất</a>
+                        <a>Năm 1</a>
                         <ul className="nested-sub-menu">
                           {this.renderCourse(1)}
                         </ul>
                       </li>
                       <li>
-                          <a>Sinh vien năm hai</a>
+                          <a>Năm 2</a>
                           <ul className="nested-sub-menu">{this.renderCourse(2)}</ul>
                       </li>
                       <li>
-                        <a>Sinh vien năm ba</a>
+                        <a>Năm 3</a>
                         <ul className="nested-sub-menu">{this.renderCourse(3)}</ul>
                       </li>
                       <li>
-                        <a>Sinh vien năm cuối</a>
+                        <a>Năm 4</a>
                         <ul className="nested-sub-menu">{this.renderCourse(4)}</ul>
                       </li>
                     </ul>
@@ -171,11 +175,40 @@ class Library extends Component {
                           <i className="fa fa-angle-left"></i>
                         </a>
                         <ul className="sub-menu">
-                          <li><a>Sub menu</a></li>
-                          <li><a>Sub menu</a></li>
-                          <li><a>Sub menu</a></li>
-                          <li><a>Sub menu</a></li>
-                        </ul>
+                          <li><a>Đổi mật khẩu</a></li>
+                          <li><a>Đăng kí Email lấy lại mật khẩu</a></li>
+                       </ul>
+                      </li>
+                      <li>
+                        <a>
+                          <i className="fa fa-laptop"></i>
+                          <span>
+                              Quản lý khóa học
+                          </span>
+                          <i className="fa fa-angle-left"></i>
+                        </a>
+                        <ul className="sub-menu">
+                          <li><a>Năm 1</a>
+                            <ul className="nested-sub-menu">
+                            {this.renderCourse(1)}
+                            </ul>
+                          </li>
+                          <li><a>Năm 2</a>
+                            <ul className="nested-sub-menu">
+                            {this.renderCourse(2)}
+                            </ul>
+                          </li>
+                          <li><a>Năm 3</a>
+                            <ul className="nested-sub-menu">
+                            {this.renderCourse(3)}
+                            </ul>
+                          </li>
+                          <li><a>Năm 4</a>
+                            <ul className="nested-sub-menu">
+                            {this.renderCourse(4)}
+                            </ul>
+                          </li>
+                       </ul>
                       </li>
                       <li>
                         <a>
@@ -186,10 +219,11 @@ class Library extends Component {
                         <i className="fa fa-angle-left"></i>
                         </a>
                           <ul className="sub-menu">
-                            <li><a>Sub menu</a></li>
-                            <li><a>Sub menu</a></li>
-                            <li><a>Sub menu</a></li>
-                            <li><a>Sub menu</a></li>
+                            <li><a>Xem lệ phí - học phí</a></li>
+                            <li><a>Xem lich thi cá nhân</a></li>
+                            <li><a>Tra cứu điểm</a></li>
+                            <li><a>Tra cứu điểm rèn luyện và xử lý học vụ</a></li>
+                            <li><a>Thông tin hồ sơ sinh viên</a></li>
                           </ul>
                       </li>
                       <li>
@@ -237,311 +271,28 @@ class Library extends Component {
                               </span>
                             </span>
                           </h4>
-                          <div className="content">
-                            <div className="important_news">
-                              <div
-                                style={{
-                                  margin: "15px",
-                                  paddingBottom: "10px",
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    color: "red",
-                                    fontWeight: "bold",
-                                    fontSize: "12px",
-                                    textAlign: "center",
-                                  }}
-                                >
-                                  [THÔNG TIN ĐÁNG CHÚ Ý]
-                                </div>
-                                <span
-                                  style={{
-                                    float: "left",
-                                    fontSize: "8px",
-                                    marginRight: "5px",
-                                    marginTop: "10px",
-                                  }}
-                                >
-                                  <img
-                                    style={{ border: "solid 0px white" }}
-                                    src={Viewpost_Image}
-                                  />
-                                </span>
-                                <div style={{ marginTop: "6px" }}>
-                                  <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.info/HomeDetail.aspx?IDThongBao=B750630FF6DD4E65AF3CAD0979938F7A">
-                                    <div style={{ marginLeft: "7px" }}>
-                                      Thông báo về việc đăng ký học online, học
-                                      kỳ 1, năm học 2016 - 2017 (Áp dụng cho các
-                                      khóa AT10 đến AT12, cơ sở đào tạo phía
-                                      Bắc) (24/06/2016)
-                                    </div>
-                                  </a>
-                                </div>
-                                <span
-                                  style={{
-                                    float: "left",
-                                    fontSize: "8px",
-                                    marginRight: "5px",
-                                    marginTop: "10px",
-                                  }}
-                                >
-                                  <img
-                                    style={{ border: "solid 0px white" }}
-                                    src={Viewpost_Image}
-                                  />
-                                </span>
-                                <div style={{ marginTop: "6px" }}>
-                                  <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.info/HomeDetail.aspx?IDThongBao=F4955F6C87C24021BDF3ADA89D870D58">
-                                    <div style={{ marginLeft: "7px" }}>
-                                      Thời khóa biểu học phần tiếng Anh cơ bản
-                                      (dành cho sinh viên AT12 phải học bổ sung)
-                                      (07/03/2016)
-                                    </div>
-                                  </a>
-                                </div>
-                                <span
-                                  style={{
-                                    float: "left",
-                                    fontSize: "8px",
-                                    marginRight: "5px",
-                                    marginTop: "10px",
-                                  }}
-                                >
-                                  <img
-                                    style={{ border: "solid 0px white" }}
-                                    src={Viewpost_Image}
-                                  />
-                                </span>
-                                <div style={{ marginTop: "6px" }}>
-                                  <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.info/HomeDetail.aspx?IDThongBao=E91556ACC3584E21B52EA8168705BD0D">
-                                    <div style={{ marginLeft: "7px" }}>
-                                      Thông tin giảng viên giảng dạy bổ sung học
-                                      phần Tiếng Anh cơ bản (lớp L03 và L06)
-                                      (03/03/2016)
-                                    </div>
-                                  </a>
-                                </div>
-                                <span
-                                  style={{
-                                    float: "left",
-                                    fontSize: "8px",
-                                    marginRight: "5px",
-                                    marginTop: "10px",
-                                  }}
-                                >
-                                  <img
-                                    style={{ border: "solid 0px white" }}
-                                    src={Viewpost_Image}
-                                  />
-                                </span>
-                                <div style={{ marginTop: "6px" }}>
-                                  <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.info/HomeDetail.aspx?IDThongBao=58801B290743444296DA8E67666D36D4">
-                                    <div style={{ marginLeft: "7px" }}>
-                                      Đăng ký online học chương trình Bổ sung
-                                      kiến thức tiếng Anh cơ bản, trình độ A1
-                                      theo định hướng TOEIC (áp dụng cho sinh
-                                      viên ngành ATTT, khóa 12, cơ sở đào tạo
-                                      phía Bắc) (01/03/2016)
-                                    </div>
-                                  </a>
-                                </div>
-                                <span
-                                  style={{
-                                    float: "left",
-                                    fontSize: "8px",
-                                    marginRight: "5px",
-                                    marginTop: "10px",
-                                  }}
-                                >
-                                  <img
-                                    style={{ border: "solid 0px white" }}
-                                    src={Viewpost_Image}
-                                  />
-                                </span>
-                                <div style={{ marginTop: "6px" }}>
-                                  <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.info/HomeDetail.aspx?IDThongBao=ADFF72A6A6AC4675B737B8C3E965E7BD">
-                                    <div style={{ marginLeft: "7px" }}>
-                                      Thông báo về việc đăng ký học online, học
-                                      kỳ 2, năm học 2015 - 2015 (Áp dụng cho các
-                                      khóa AT10 đến AT12, cơ sở đào tạo phía
-                                      Bắc) (15/12/2015)
-                                    </div>
-                                  </a>
-                                </div>
-                                <span
-                                  style={{
-                                    float: "left",
-                                    fontSize: "8px",
-                                    marginRight: "5px",
-                                    marginTop: "10px",
-                                  }}
-                                >
-                                  <img
-                                    style={{ border: "solid 0px white" }}
-                                    src={Viewpost_Image}
-                                  />
-                                </span>
-                                <div style={{ marginTop: "6px" }}>
-                                  <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.info/HomeDetail.aspx?IDThongBao=1CE348251228482EB8913C8891556A67">
-                                    <div style={{ marginLeft: "7px" }}>
-                                      Hướng dẫn nộp học phí qua tài khoản
-                                      (03/11/2015)
-                                    </div>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="new_news">
-                              <div>
-                                <b>Chưa có dữ liệu</b>
-                              </div>
-                              <div className="news_detail">
-                                <a href="HomeDetail.aspx?IDThongBao=">
-                                  Xem chi tiết
-                                </a>
-                              </div>
-                            </div>
-                            <div
-                              className="old_news"
-                              style={{ position: "relative" }}
-                            ></div>
-                            <div style={{ clear: "both" }} />
-                          </div>
+                          {/* CONTENT */}
+                            <Content />
+                          {/* END */}
+
                           {/* COURSE*/}
-                          <div className="myCourses ">
-                            <div className="video-controls">
-                              <video controls allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
-                                <source src="./video/https___login.codepro.vn_Home_CourseScreen1_unitID=50 - Google Chrome 2020-06-17 21-49-38.mp4" />
-                              </video>
-                              <div className="scorm-info-wr">
-                                <p className="course-section-name">Chương 1. Ma trận - định thức</p>
-                                <h1 className="scorm-name">Bài 1. Ma trận</h1>
-                                <p className="scorm-play-time">Độ dài: 19 phút</p>
-                              </div>
-                              <ul className="scorm-detail-documents clearfix">
-                                <li className="clearfix">
-                                  <a href="https://hoc247.net/dai-so-tuyen-tinh/bai-1-ma-tran-l8259.html" className="scorm-document-name">
-                                    <i className="fa fa-book" /> Tài liệu bài giảng
-                                  </a>
-                                </li>
-                                <li className="clearfix">
-                                  <a href="https://fita.vnua.edu.vn/wp-content/uploads/2019/11/BT-va-HD-OLP-DS.pdf" className="scorm-document-name">
-                                    <i className="fa fa-file" /> Bài tập tự luyện
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
-                            <div className="slidebar-second fixsb">
-                              <div className="course-outline-head">
-                                <i className="fa fa-list" /> Đề cương
-                                <span> khóa học</span>
-                              </div>
-                              <div id="course-outline" className="clearfix">
-                                <div className="scroll-wrapper course-outline-wr">
-                                  <div id="course-outline-main" className="course-outline-wr scroll-content">
-                                    <div id="scorm-section-id-1" className="scorm-section-right">
-                                      <h3 className="section-right-name">
-                                        CHƯƠNG 1
-                                      </h3>
-                                      <div id="learn-outline-section">
-                                        <ul className="learn-outline-list ">
-                                          <li className="learn-outline-item">
-                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">
-                                              Bài 1: Giới thiệu
-                                              <div className="lesson-process-wr">
-                                              </div>
-                                            </a>
-                                          </li>
-                                          <li className="learn-outline-item">
-                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                                              2: Giới thiệu
-                                              <div className="lesson-process-wr">
-                                              </div>
-                                            </a>
-                                          </li>
-                                          <li className="learn-outline-item">
-                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                                              3: Giới thiệu
-                                              <div className="lesson-process-wr">
-                                              </div>
-                                            </a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                    </div>
-                                    <div id="scorm-section-id-2" className="scorm-section-right">
-                                      <h3 className="section-right-name">
-                                        CHƯƠNG 2
-                                      </h3>
-                                      <div id="learn-outline-section">
-                                        <ul className="learn-outline-list ">
-                                          <li className="learn-outline-item">
-                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                                              1: Giới thiệu
-                                              <div className="lesson-process-wr">
-                                              </div>
-                                            </a>
-                                          </li>
-                                          <li className="learn-outline-item">
-                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                                              2: Giới thiệu
-                                              <div className="lesson-process-wr">
-                                              </div>
-                                            </a>
-                                          </li>
-                                          <li className="learn-outline-item">
-                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                                              3: Giới thiệu
-                                              <div className="lesson-process-wr">
-                                              </div>
-                                            </a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                    </div>
-                                    <div id="scorm-section-id-3" className="scorm-section-right">
-                                      <h3 className="section-right-name">
-                                        CHƯƠNG 3
-                                      </h3>
-                                      <div id="learn-outline-section">
-                                        <ul className="learn-outline-list ">
-                                          <li className="learn-outline-item">
-                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                                              1: Giới thiệu
-                                              <div className="lesson-process-wr">
-                                              </div>
-                                            </a>
-                                          </li>
-                                          <li className="learn-outline-item">
-                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                                              2: Giới thiệu
-                                              <div className="lesson-process-wr">
-                                              </div>
-                                            </a>
-                                          </li>
-                                          <li className="learn-outline-item">
-                                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                                              3: Giới thiệu
-                                              <div className="lesson-process-wr">
-                                              </div>
-                                            </a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-  {/* </div> */}
-</div>
+                          <MyCourse />
 
-
-                       
-                        </div>
+                          {/* COURSEMANAGEMENT */}
+                          <div className="courseManagement">
+                          
+                            {/* <CourseManagement />       
+                            <CourseManagement />    
+                            <CourseManagement />   */}
+                            </div>
+                            </div>
                        
                         {/* END COURSE */}
+
+                        {/* table course */}
+                          <TableCourse />
+                        {/* end */}
+
                       </td>
                     </tr>
                   </tbody>

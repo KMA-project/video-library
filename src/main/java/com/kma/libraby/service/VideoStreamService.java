@@ -1,14 +1,13 @@
 package com.kma.libraby.service;
 
 import com.kma.libraby.constants.ApplicationConstants;
-import com.kma.libraby.domain.Account;
 import com.kma.libraby.domain.Course;
 import com.kma.libraby.domain.Lesson;
 import com.kma.libraby.domain.Video;
 import com.kma.libraby.repository.AccountRepository;
 import com.kma.libraby.repository.VideoRepository;
 import com.kma.libraby.service.dto.ui.VideoUploadDTO;
-import com.kma.libraby.service.utils.SystemUtils;
+import com.kma.libraby.service.utils.ApplicationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +42,7 @@ public class VideoStreamService {
         long rangeEnd;
         byte[] data;
         Long fileSize;
-        String fullFileName = SystemUtils.deserializeData(fileName) + "." + fileType;
+        String fullFileName = ApplicationUtils.deserializeData(fileName) + "." + fileType;
         try {
             fileSize = getFileSize(fullFileName);
             if (range == null) {
@@ -124,8 +123,39 @@ public class VideoStreamService {
         video.setActive(true);
         video.setTitleName(videoUploadDTO.getTitleName());
         String fileName = videoUploadDTO.getVideo().getOriginalFilename();
-        video.setUrlName(SystemUtils.serializeData(fileName.substring(0,fileName.length()-4)));
+        video.setUrlName(ApplicationUtils.serializeData(fileName.substring(0,fileName.length()-4)));
         return videoRepository.save(video);
+    }
+
+    public Optional<Video> updateVideo(VideoUploadDTO videoUploadDTO){
+        try {
+            File file = new File(ApplicationConstants.IMAGE_DIRECTORY + videoUploadDTO.getVideo().getOriginalFilename());//;lưu ảnh vào folder dự án
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(videoUploadDTO.getVideo().getBytes());
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Course course = new Course();
+        course.setCourseId(videoUploadDTO.getBelong_to());
+        Lesson lesson = new Lesson();
+        lesson.setLessonId(videoUploadDTO.getLessonId());
+        Video video = new Video();
+        video.setVideoId(videoUploadDTO.getVideoId());
+        video.setBelong_to(course);
+        video.setLessonId(lesson);
+        video.setAddedBy(videoUploadDTO.getAddedBy());
+        video.setActive(true);
+        video.setTitleName(videoUploadDTO.getTitleName());
+        String fileName = videoUploadDTO.getVideo().getOriginalFilename();
+        video.setUrlName(ApplicationUtils.serializeData(fileName.substring(0,fileName.length()-4)));
+        return Optional.of(videoRepository.save(video));
+    }
+
+    public void updateVideoStatus(int newsId,boolean status){
+        videoRepository.findById(newsId).ifPresent(
+                news -> {videoRepository.updateNewStatus(status,newsId);}
+        );
     }
 
     /**
@@ -145,7 +175,7 @@ public class VideoStreamService {
      * @return Long.
      */
     public Long getFileSize(String fileName) {
-        fileName = SystemUtils.deserializeData(fileName);
+        fileName = ApplicationUtils.deserializeData(fileName);
         return Optional.ofNullable(fileName)
                 .map(file -> Paths.get(getFilePath(), file))
                 .map(this::sizeFromFile)

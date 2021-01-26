@@ -4,7 +4,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.util.SerializationUtils;
 
 
-public class SystemUtils {//chứa các function dùng chung hệ thống
+public class ApplicationUtils {//chứa các function dùng chung hệ thống
 
     public static String serializeData(String original){
         byte[] input = SerializationUtils.serialize((original));
