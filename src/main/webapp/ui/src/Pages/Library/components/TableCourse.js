@@ -49,12 +49,14 @@ class TableCourse extends Component {
     super(props);
     this.state = {
       isOpen: false,
+      lesson: {},
     };
   }
 
-  handleOpen = () => {
+  handleOpen = (lesson) => {
     this.setState({
       isOpen: true,
+      lesson,
     });
   };
 
@@ -82,14 +84,39 @@ class TableCourse extends Component {
     console.log("Destroy!");
   };
 
+  renderLesson = (courseDetail) => {
+    if (courseDetail.lessons) {
+      return courseDetail.lessons.map((lesson, index) => (
+        <TableRow key={index}>
+          <TableCell component="th" scope="row">
+            {lesson.lessonName}
+          </TableCell>
+          <TableCell align="center">Ngọc ngu</TableCell>
+          <TableCell align="center">
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ minWidth: "0", padding: "6px 12px" }}
+              onClick={() => this.handleOpen(lesson)}
+            >
+              <EditIcon />
+            </Button>
+          </TableCell>
+        </TableRow>
+      ));
+    }
+  };
+
   render() {
     const classes = this.props.classes;
     const { courseDetail } = this.props.stateOfLibraryReducers;
+    console.log(this.state.lesson);
     return (
       <Fragment>
         {this.state.isOpen && (
           <ModalForm
-             courseDetail={courseDetail}
+            lesson={this.state.lesson}
+            courseDetail={courseDetail}
             isOpen={this.state.isOpen}
             handleClose={this.handleClose}
             classes={classes}
@@ -105,24 +132,7 @@ class TableCourse extends Component {
                 <TableCell align="center">Chi tiết</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell component="th" scope="row">
-                  {courseDetail.courseName}
-                </TableCell>
-                <TableCell align="center">Ngọc ngu</TableCell>
-                <TableCell align="center">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    style={{ minWidth: "0", padding: "6px 12px" }}
-                    onClick={this.handleOpen}
-                  >
-                    <EditIcon />
-                  </Button>
-                </TableCell>
-              </TableRow>
-            </TableBody>
+            <TableBody>{this.renderLesson(courseDetail)}</TableBody>
           </Table>
         </TableContainer>
       </Fragment>

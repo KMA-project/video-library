@@ -27,7 +27,7 @@ public class Video {
     @Column(name = "url_name")
     private String urlName;
 
-    @Column(name = "addedBy",length = 37)
+    @Column(name = "added_by",length = 37)
     private String addedBy;
 
     @Column(name = "created_date",updatable = false)

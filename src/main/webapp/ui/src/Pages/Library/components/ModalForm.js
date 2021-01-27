@@ -15,12 +15,13 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-
+import callAPI from "../../../axios";
 class ModalForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lessonName: "",
+      videoName: "",
+      video: ""
     };
   }
 
@@ -28,23 +29,28 @@ class ModalForm extends Component {
     this.props.handleClose();
   };
 
+  componentDidMount = () => {};
+
   componentWillUnmount = () => {
     console.log("Destroy!");
   };
 
   handleChange = (event) => {
-    // const {lessonName} = JSON.parse(event.target.value);
+    // const {videoName} = JSON.parse(event.target.value);
     this.setState({
-      lessonName: event.target.value,
+      videoName: event.target.value,
     });
   };
 
-  getVideo = (item) => {
-    console.log(item);
+  getVideo = async (item) => {
+    const  {data}  = await callAPI(`video/stream/mp4/${item.urlName}`, "GET");
+    this.setState({ 
+      video: data
+    })
   };
   render() {
-    const { courseDetail } = this.props;
-    // console.log(courseDetail);
+    const { lesson } = this.props;
+    console.log(this.state.video);
     return (
       <Modal
         aria-labelledby="transition-modal-title"
@@ -59,16 +65,16 @@ class ModalForm extends Component {
       >
         <Fade in={this.props.isOpen}>
           <div className={this.props.classes.paper}>
-            <h1 style={{ textAlign: "center" }}>Chọn khóa học</h1>
+            <h1 style={{ textAlign: "center" }}>Chọn bài học</h1>
             <form>
               <TextField
                 id="outlined-search"
-                label="Tên khóa học"
+                label="Tên chương học"
                 type="Text"
                 variant="outlined"
                 size="small"
                 style={{ width: "100%", marginTop: "2rem" }}
-                value={courseDetail.courseName}
+                value={lesson.lessonName}
               />
               <FormControl
                 variant="outlined"
@@ -82,22 +88,26 @@ class ModalForm extends Component {
                   labelId="demo-simple-select-outlined-label"
                   id="demo-simple-select-outlined"
                   size="small"
-                  value={this.state.lessonName}
+                  value={this.state.videoName}
                   onChange={this.handleChange}
                   label="Age"
                 >
-                  {courseDetail.lessons.map((lesson, index) => (
+                  {lesson.videos.map((video, index) => (
                     <MenuItem
                       key={index}
-                      value={lesson.lessonName}
-                      onClick={() => this.getVideo(lesson)}
+                      value={video.titleName}
+                      onClick={() => this.getVideo(video)}
                     >
-                      {lesson.lessonName}
+                      {video.titleName}
                     </MenuItem>
                   ))}
                 </Select>
               </FormControl>
             </form>
+            <video width="320" height="240" controls>
+              <source src={this.state.video} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </Fade>
       </Modal>

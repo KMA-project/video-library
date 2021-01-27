@@ -20,7 +20,7 @@ export default function callAPI(
        data: body,
      })
        .then(response => {
-        //  console.log(response);
+        //  console.log(response.data);
          resolve(response);
        })
        .catch(error => {

@@ -41,12 +41,15 @@ public class Course implements Serializable {
     private Account createdBy;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "belong_to")
+    @JsonIgnore
     private Set<Video> videos;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "belong_to")
+    @JsonIgnore
     private Set<Document> documents;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "course")
+    @OrderBy("lessonName")
     private Set<Lesson> lessons;
 
 

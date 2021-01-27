@@ -27,7 +27,7 @@ public class Document {
     @Column(name = "document_url",nullable = false,length = 100)
     private String documentUrl;
 
-    @Column(name = "addedBy",length = 37)
+    @Column(name = "added_by",length = 37)
     private String addedBy;
 
     @Column(name = "created_date",updatable = false)

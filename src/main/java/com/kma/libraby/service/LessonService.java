@@ -22,4 +22,10 @@ public class LessonService {
     public Optional<Lesson> findByLessonId(@Param("lessonId") int lessonId){
         return lessonRepository.findById(lessonId);
     }
+
+    public void deleteLesson(int newsId){
+        lessonRepository.findById(newsId).ifPresent(
+                news -> {lessonRepository.delete(news);}
+        );
+    }
 }
