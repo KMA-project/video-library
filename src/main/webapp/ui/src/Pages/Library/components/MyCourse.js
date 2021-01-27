@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+const url = "http://05c4298cec51.ngrok.io/videos";
 class MyCourse extends Component {
     constructor(props) {
         super(props);
@@ -8,13 +9,12 @@ class MyCourse extends Component {
         return ( 
             <div className="myCourses ">
             <div className="video-controls">
-              <video controls allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
-                <source src="./video/https___login.codepro.vn_Home_CourseScreen1_unitID=50 - Google Chrome 2020-06-17 21-49-38.mp4" />
+              <video src={`${url}/01-Tổng hợp và phân tích lực_Phần 1.mp4`} controls allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
               </video>
               <div className="scorm-info-wr">
-                <p className="course-section-name">Chương 1. Ma trận - định thức</p>
-                <h1 className="scorm-name">Bài 1. Ma trận</h1>
-                <p className="scorm-play-time">Độ dài: 19 phút</p>
+                <p className="course-section-name">Chương 1. Động học chất điểm</p>
+                <h1 className="scorm-name">Bài 1. Lực-Cân bằng lực</h1>
+                <p className="scorm-play-time">Độ dài: 4:55 phút</p>
               </div>
               <ul className="scorm-detail-documents clearfix">
                 <li className="clearfix">
@@ -39,27 +39,27 @@ class MyCourse extends Component {
                   <div id="course-outline-main" className="course-outline-wr scroll-content">
                     <div id="scorm-section-id-1" className="scorm-section-right">
                       <h3 className="section-right-name">
-                        CHƯƠNG 1
+                        CHƯƠNG 1:Động học chất điểm
                       </h3>
                       <div id="learn-outline-section">
                         <ul className="learn-outline-list ">
                           <li className="learn-outline-item">
                             <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">
-                              Bài 1: Giới thiệu
+                              Bài 1: Khái quát về chuyển động cơ học
                               <div className="lesson-process-wr">
                               </div>
                             </a>
                           </li>
                           <li className="learn-outline-item">
                             <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                              2: Giới thiệu
+                              2: Phương trình chuyển động và phương trình quỹ đạo
                               <div className="lesson-process-wr">
                               </div>
                             </a>
                           </li>
                           <li className="learn-outline-item">
                             <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                              3: Giới thiệu
+                              3: Vận tốc của chuyển động
                               <div className="lesson-process-wr">
                               </div>
                             </a>
@@ -69,27 +69,27 @@ class MyCourse extends Component {
                     </div>
                     <div id="scorm-section-id-2" className="scorm-section-right">
                       <h3 className="section-right-name">
-                        CHƯƠNG 2
+                        CHƯƠNG 2:Động lực học chất điểm
                       </h3>
                       <div id="learn-outline-section">
                         <ul className="learn-outline-list ">
                           <li className="learn-outline-item">
                             <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                              1: Giới thiệu
+                              1: Các định luật Niu-tơn
                               <div className="lesson-process-wr">
                               </div>
                             </a>
                           </li>
                           <li className="learn-outline-item">
                             <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                              2: Giới thiệu
+                              2: Nguyên lý tương đối Galie
                               <div className="lesson-process-wr">
                               </div>
                             </a>
                           </li>
                           <li className="learn-outline-item">
                             <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                              3: Giới thiệu
+                              3: Lực tác dụng lên chất điểm chuyển động
                               <div className="lesson-process-wr">
                               </div>
                             </a>
@@ -99,27 +99,27 @@ class MyCourse extends Component {
                     </div>
                     <div id="scorm-section-id-3" className="scorm-section-right">
                       <h3 className="section-right-name">
-                        CHƯƠNG 3
+                        CHƯƠNG 3:Chuyển động của hệ chất điểm và vật rắn
                       </h3>
                       <div id="learn-outline-section">
                         <ul className="learn-outline-list ">
                           <li className="learn-outline-item">
                             <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                              1: Giới thiệu
+                              1: Các dạng chuyển động của vật rắn
                               <div className="lesson-process-wr">
                               </div>
                             </a>
                           </li>
                           <li className="learn-outline-item">
                             <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                              2: Giới thiệu
+                              2: Chuyển động của khối tâm
                               <div className="lesson-process-wr">
                               </div>
                             </a>
                           </li>
                           <li className="learn-outline-item">
                             <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                              3: Giới thiệu
+                              3: Bài toán va chạm
                               <div className="lesson-process-wr">
                               </div>
                             </a>

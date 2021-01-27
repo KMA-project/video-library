@@ -32,7 +32,7 @@ public class VideoController {
     }
 
     @PostMapping("/videos")//Add new Video
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Video> saveCategory(@ModelAttribute VideoUploadDTO videoUploadDTO) throws URISyntaxException {
         if (videoUploadDTO.getVideoId() != 0) {
             throw new BadRequestAlertException(String.valueOf(videoUploadDTO.getVideoId()));

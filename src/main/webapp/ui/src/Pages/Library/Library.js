@@ -186,19 +186,6 @@ class Library extends Component {
                         <a>
                           <i className="fa fa-laptop"></i>
                           <span>
-                              Quản lý mật khẩu
-                          </span>
-                          <i className="fa fa-angle-left"></i>
-                        </a>
-                        <ul className="sub-menu">
-                          <li><a>Đổi mật khẩu</a></li>
-                          <li><a>Đăng kí Email lấy lại mật khẩu</a></li>
-                       </ul>
-                      </li>
-                      <li>
-                        <a>
-                          <i className="fa fa-laptop"></i>
-                          <span>
                               Quản lý khóa học
                           </span>
                           <i className="fa fa-angle-left"></i>
@@ -224,6 +211,19 @@ class Library extends Component {
                             {this.renderCourse(4, "/course_management")}
                             </ul>
                           </li>
+                       </ul>
+                      </li>
+                      <li>
+                        <a>
+                          <i className="fa fa-laptop"></i>
+                          <span>
+                              Quản lý mật khẩu
+                          </span>
+                          <i className="fa fa-angle-left"></i>
+                        </a>
+                        <ul className="sub-menu">
+                          <li><a>Đổi mật khẩu</a></li>
+                          <li><a>Đăng kí Email lấy lại mật khẩu</a></li>
                        </ul>
                       </li>
                       <li>
