@@ -7,11 +7,9 @@ export const {store} = CreateStore();
 // import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
       {RouterIndex}
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
   document.getElementById('root')
 );
 

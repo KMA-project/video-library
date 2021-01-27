@@ -21,7 +21,27 @@ function* getCoursesRequest() {
     yield takeEvery(LibraryActions.GET_COURSES_REQUEST, handleGetCoursesRequest);
 }
 
+function* handleGetCourseDetailRequest(action) {
+    try {
+        const {headers, data, statusText} = yield call(LibraryApis.getCourseDetail, action.payload); 
+        // if (statusText === "OK") {
+            yield put(LibraryActions.getCourseDetailSuccess(data));
+            // console.log(data);
+        // }
+
+    } catch (error) {
+        // console.log("reached", error);
+        yield put(LibraryActions.getCourseDetailError(error));
+    }
+}
+
+
+function* getCourseDetailRequest() {
+    yield takeEvery(LibraryActions.GET_COURSE_DETAIL_REQUEST, handleGetCourseDetailRequest);
+}
+
 
 export default {
-    getCoursesRequest
+    getCoursesRequest,
+    getCourseDetailRequest
 }   
