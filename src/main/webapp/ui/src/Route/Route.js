@@ -34,7 +34,7 @@ const RouterIndex = (
       <Library>
         <Route exact path="/library" component={Content} />
 
-        <Route exact path="/my_course" component={MyCourse} />
+        <Route exact path="/my_course/:courseId" component={MyCourse} />
         <Route exact path="/course_management/:courseId" component={TableCourse} />
       </Library>
 
