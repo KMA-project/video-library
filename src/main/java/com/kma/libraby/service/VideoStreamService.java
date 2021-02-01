@@ -123,7 +123,7 @@ public class VideoStreamService {
         video.setActive(true);
         video.setTitleName(videoUploadDTO.getTitleName());
         String fileName = videoUploadDTO.getVideo().getOriginalFilename();
-        video.setUrlName(ApplicationUtils.serializeData(fileName.substring(0,fileName.length()-4)));
+        video.setVideoUrl(ApplicationUtils.serializeData("/videos/" +fileName.substring(0,fileName.length()-4)));
         return videoRepository.save(video);
     }
 
@@ -148,7 +148,7 @@ public class VideoStreamService {
         video.setActive(true);
         video.setTitleName(videoUploadDTO.getTitleName());
         String fileName = videoUploadDTO.getVideo().getOriginalFilename();
-        video.setUrlName(ApplicationUtils.serializeData(fileName.substring(0,fileName.length()-4)));
+        video.setVideoUrl(ApplicationUtils.serializeData("/videos/" +fileName.substring(0,fileName.length()-4)));
         return Optional.of(videoRepository.save(video));
     }
 

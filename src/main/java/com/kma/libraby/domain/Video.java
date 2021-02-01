@@ -24,8 +24,8 @@ public class Video {
     @Column(name = "title_name",nullable = false,length = 150)
     private String titleName;
 
-    @Column(name = "url_name")
-    private String urlName;
+    @Column(name = "video_url")
+    private String videoUrl;
 
     @Column(name = "added_by",length = 37)
     private String addedBy;

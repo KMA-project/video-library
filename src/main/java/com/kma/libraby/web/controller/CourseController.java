@@ -1,7 +1,6 @@
 package com.kma.libraby.web.controller;
 
 import com.kma.libraby.domain.Course;
-import com.kma.libraby.domain.Lesson;
 import com.kma.libraby.service.CourseService;
 import com.kma.libraby.service.dto.ui.CourseDTO;
 import com.kma.libraby.web.errors.ErrorConstants;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;

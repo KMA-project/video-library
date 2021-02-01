@@ -262,49 +262,29 @@ class Library extends Component {
                         </li>
                         <li>
                           <a>Năm 2</a>
-                          <ul className="nested-sub-menu">
-                            {this.renderCourse(2, "/my_course")}
-                          </ul>
-                        </li>
-                        <li>
-                          <a>Năm 3</a>
-                          <ul className="nested-sub-menu">
-                            {this.renderCourse(3, "/my_course")}
-                          </ul>
-                        </li>
-                        <li>
-                          <a>Năm 4</a>
-                          <ul className="nested-sub-menu">
-                            {this.renderCourse(4, "/my_course")}
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a>
-                        <i className="fa fa-laptop"></i>
-                        <span>Quản lý mật khẩu</span>
-                        <i className="fa fa-angle-left"></i>
-                      </a>
-                      <ul className="sub-menu">
-                        <li>
-                          <a>Đổi mật khẩu</a>
-                        </li>
-                        <li>
-                          <a>Đăng kí Email lấy lại mật khẩu</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a>
-                        <i className="fa fa-laptop"></i>
-                        <span>Quản lý khóa học</span>
-                        <i className="fa fa-angle-left"></i>
-                      </a>
-                      <ul className="sub-menu">
-                        <li>
-                          <a>Năm 1</a>
-                          <ul className="nested-sub-menu">
+                          <ul className="nested-sub-menu">{this.renderCourse(2, "/my_course")}</ul>
+                      </li>
+                      <li>
+                        <a>Năm 3</a>
+                        <ul className="nested-sub-menu">{this.renderCourse(3, "/my_course")}</ul>
+                      </li>
+                      <li>
+                        <a>Năm 4</a>
+                        <ul className="nested-sub-menu">{this.renderCourse(4, "/my_course")}</ul>
+                      </li>
+                    </ul>
+                      </li>
+                      <li>
+                        <a>
+                          <i className="fa fa-laptop"></i>
+                          <span>
+                              Quản lý khóa học
+                          </span>
+                          <i className="fa fa-angle-left"></i>
+                        </a>
+                        <ul className="sub-menu">
+                          <li><a>Năm 1</a>
+                            <ul className="nested-sub-menu">
                             {this.renderCourse(1, "/course_management")}
                             {
                               lessonArr.map((item, index) => (
@@ -353,6 +333,19 @@ class Library extends Component {
                     </li>
                     <li>
                       <a>
+                          <i className="fa fa-laptop"></i>
+                          <span>
+                              Quản lý mật khẩu
+                          </span>
+                          <i className="fa fa-angle-left"></i>
+                        </a>
+                        <ul className="sub-menu">
+                          <li><a>Đổi mật khẩu</a></li>
+                          <li><a>Đăng kí Email lấy lại mật khẩu</a></li>
+                       </ul>
+                      </li>
+                      <li>
+                        <a>
                         <i className="fa fa-laptop"></i>
                         <span>Thông tin cá nhân</span>
                         <i className="fa fa-angle-left"></i>
