@@ -3,6 +3,8 @@ package com.kma.libraby.service.utils;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.util.SerializationUtils;
 
+import java.util.UUID;
+
 
 public class ApplicationUtils {//chứa các function dùng chung hệ thống
 
@@ -23,5 +25,9 @@ public class ApplicationUtils {//chứa các function dùng chung hệ thống
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static String serializeUUID(String original){
+        return UUID.randomUUID().toString();
     }
 }

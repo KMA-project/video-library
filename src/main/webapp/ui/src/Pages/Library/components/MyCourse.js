@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-const url = "http://05c4298cec51.ngrok.io/videos";
+const url = "http://919ea638de1f.ngrok.io/api/video/stream/mp4";
 class MyCourse extends Component {
     constructor(props) {
         super(props);
@@ -9,7 +9,7 @@ class MyCourse extends Component {
         return ( 
             <div className="myCourses ">
             <div className="video-controls">
-              <video src={`${url}/01-Tổng hợp và phân tích lực_Phần 1.mp4`} controls allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
+              <video src={`${url}/rO0ABXQARUjGr+G7mk5HIEThuqpOIEdJ4bqiSSBCw4BJIFThuqxQIELDgEkgMS4gxJDhu5hORyBI4buMQyBDSOG6pFQgxJBJ4buCTQ==`} controls allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
               </video>
               <div className="scorm-info-wr">
                 <p className="course-section-name">Chương 1. Động học chất điểm</p>

@@ -24,8 +24,11 @@ public class Video {
     @Column(name = "title_name",nullable = false,length = 150)
     private String titleName;
 
-    @Column(name = "video_url")
+    @Column(name = "video_url",length = 200)
     private String videoUrl;
+
+    @Column(name = "length")
+    private String length;
 
     @Column(name = "added_by",length = 37)
     private String addedBy;

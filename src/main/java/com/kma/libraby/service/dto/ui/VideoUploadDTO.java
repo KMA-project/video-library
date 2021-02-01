@@ -16,5 +16,6 @@ public class VideoUploadDTO {
     private String addedBy;
     private int lessonId;
     private int belong_to;
+    private String length;
     private MultipartFile video;
 }

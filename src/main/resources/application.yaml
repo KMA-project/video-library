@@ -23,7 +23,7 @@ spring:
       max-file-size: 128MB
       max-request-size: 128MB
   resources:
-    static-locations: classpath:/
+    static-locations: classpath:/videos/
 secretKey: MjlhMTU0MzFiNmUxYzY0MDlkMGYwM2ZhMTE5NGYyNWI1YTIxOTgxMjE5MGYyYzU1NGU2OGM4ZjgxNjRlOWIwN2IxODYxYWY2OGFjNmQ0ZDk2YjY2MDdmYmYzMWZkMGUzNjQzOWU1M2YxODQ2NmM0MTIzNGIwZDE3NWVlZWIzYTk=
 
 

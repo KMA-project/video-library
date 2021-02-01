@@ -28,9 +28,13 @@ public class Lesson {
     @Column(name = "created_date")
     private Date createdDate;
 
+    @Column(name = "added_by",length = 37)
+    private String addedBy;
+
     private boolean active;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "lessonId")
+    @OrderBy("titleName")
     private Set<Video> videos;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "lessonId")
