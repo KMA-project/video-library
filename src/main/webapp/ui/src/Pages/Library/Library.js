@@ -3,7 +3,9 @@ import "./Click.js";
 import "./Library.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import { getCoursesRequest } from "./actions/LibraryActions";
+import { withStyles } from "@material-ui/core/styles";
 import Screenshot_202329 from "../../assets/img/Screenshot 2020-11-18 202329.png";
 import Screenshot_203722 from "../../assets/img/Screenshot 2020-11-18 203722.png";
 import Screenshot_224803 from "../../assets/img/Screenshot 2020-11-18 224803.png";
@@ -16,36 +18,114 @@ import CourseManagement from "./components/CourseManagement.js";
 import TableCourse from "./components/TableCourse.js";
 import MyCourse from "./components/MyCourse.js";
 import Content from "./components/Content.js";
+import TextField from "@material-ui/core/TextField";
+import Modal from "@material-ui/core/Modal";
 
-const renderCourseData = ["/my_course", "", "/course_management", ""]
+const styles = (theme) => ({
+  table: {
+    minWidth: 250,
+  },
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    width: "700px",
+  },
+});
+
+const renderCourseData = ["/my_course", "", "/course_management", ""];
 class Library extends Component {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false,
+      lesson: ""
+    };
+  }
   componentDidMount = () => {
     this.props.getCoursesRequest();
+  };
+
+  handleOpen = () => {
+    this.setState({
+      isOpen: true,
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      isOpen: false,
+    });
+  };
+
+
+  submitLesson = (e) => {
+    e.preventDefault();
+    let lessonArr = [];
+    let temp = JSON.parse(localStorage.getItem("lesson")) || [];
+    temp.push(this.state.lesson);
+    localStorage.setItem("lesson", JSON.stringify(temp));
+    this.setState({
+      isOpen: false
+    })
   }
 
- renderCourse = (year, link_name) => {
-  const { courses } = this.props.stateOfLibraryReducers;
+  onChangeInput = (e) => {
+    const { value } = e.target;
+
+    this.setState({
+      lesson: value
+    })
+  }
+  renderCourse = (year, link_name) => {
+    const { courses } = this.props.stateOfLibraryReducers;
     return courses.map((item, index) => {
-      if(item.gradeYear === year )
+      if (item.gradeYear === year)
         switch (link_name) {
           case "/my_course":
-            return <li key={item.courseId} style={{width: "33.33%"}}><Link to="/my_course">{item.courseName}</Link></li>
-  
+            return (
+        
+                <li key={item.courseId} style={{ width: "33.33%" }}>
+                  <Link to={`/my_course/${item.courseId}`}>
+                    {item.courseName}
+                  </Link>
+                </li>
+          
+            );
+
           case "/course_management":
-            return <li key={item.courseId} style={{width: "33.33%"}}><Link to={`/course_management/${item.courseId}`}>{item.courseName}</Link></li> 
+            return (
+        
+                <li key={item.courseId} style={{ width: "33.33%" }}>
+                  <Link to={`/course_management/${item.courseId}`}>
+                    {item.courseName}
+                  </Link>
+                </li>
+          
+            );
           default:
-            return <li key={item.courseId} style={{width: "33.33%"}}><Link to="">{item.courseName}</Link></li>
-            break;
+            return (
+        
+                <li key={item.courseId} style={{ width: "33.33%" }}>
+                  <Link to="">{item.courseName}</Link>
+                </li>
+          
+            );
         }
-      })
-    }
+    });
+  };
 
   // switchLink = (item, index) => {
   //   switch(renderCourseData[index]) {
   //     case "/my_course":
   //       return <Link to="/my_course">{item.courseName}</Link>
-  //     case "/course_management":      
+  //     case "/course_management":
   //       return <Link to="/course_management">{item.courseName}</Link>
   //     default:
   //       return <a>{item.courseName}</a>
@@ -55,10 +135,13 @@ class Library extends Component {
   render() {
     // const { courses } = this.props.stateOfLibraryReducers;
     // console.log(this.props.stateOfLibraryReducers)
+    const classes = this.props.classes;
+    let lessonArr = JSON.parse(localStorage.getItem("lesson")) || [];
     return (
+
       <Fragment>
         <header className="header-main">
-          <div id="header"> 
+          <div id="header">
             <div className="school_name">
               <span id="PageHeader1_lblWebtitle">HỌC VIỆN KỸ THUẬT MẬT MÃ</span>
             </div>
@@ -156,26 +239,28 @@ class Library extends Component {
                     <h1>Danh mục chính</h1>
                   </div>
                   <ul className="menu">
-                      <li>
-                        <a>
-                          <i className="fa fa-laptop"></i>
-                          <span>
-                            Đăng ký học
-                          </span>
-                          <i className="fa fa-angle-left"></i>
-                        </a>
-                      </li>
-                      <li><a>Home</a></li>
-                      <li>
-                      <a><i className="fa fa-laptop"></i>Khóa học</a>
+                    <li>
+                      <a>
+                        <i className="fa fa-laptop"></i>
+                        <span>Đăng ký học</span>
+                        <i className="fa fa-angle-left"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a>Home</a>
+                    </li>
+                    <li>
+                      <a>
+                        <i className="fa fa-laptop"></i>Khóa học
+                      </a>
                       <ul className="sub-menu">
-                      <li>
-                        <a>Năm 1</a>
-                        <ul className="nested-sub-menu">
-                          {this.renderCourse(1, "/my_course")}
-                        </ul>
-                      </li>
-                      <li>
+                        <li>
+                          <a>Năm 1</a>
+                          <ul className="nested-sub-menu">
+                            {this.renderCourse(1, "/my_course")}
+                          </ul>
+                        </li>
+                        <li>
                           <a>Năm 2</a>
                           <ul className="nested-sub-menu">{this.renderCourse(2, "/my_course")}</ul>
                       </li>
@@ -201,27 +286,53 @@ class Library extends Component {
                           <li><a>Năm 1</a>
                             <ul className="nested-sub-menu">
                             {this.renderCourse(1, "/course_management")}
-                            </ul>
-                          </li>
-                          <li><a>Năm 2</a>
-                            <ul className="nested-sub-menu">
+                            {
+                              lessonArr.map((item, index) => (
+                                <li style={{width: "33.33%", padding: "1rem"}} key={index}>{item}</li>
+                              ))
+                            }
+                          </ul>
+                        </li>
+                        <li>
+                          <a>Năm 2</a>
+                          <ul className="nested-sub-menu">
                             {this.renderCourse(2, "/course_management")}
-                            </ul>
-                          </li>
-                          <li><a>Năm 3</a>
-                            <ul className="nested-sub-menu">
+                            {
+                              lessonArr.map((item, index) => (
+                                <li style={{width: "33.33%", padding: "1rem"}} key={index}>{item}</li>
+                              ))
+                            }
+                          </ul>
+                        </li>
+                        <li>
+                          <a>Năm 3</a>
+                          <ul className="nested-sub-menu">
                             {this.renderCourse(3, "/course_management")}
-                            </ul>
-                          </li>
-                          <li><a>Năm 4</a>
-                            <ul className="nested-sub-menu">
+                            {
+                              lessonArr.map((item, index) => (
+                                <li style={{width: "33.33%", padding: "1rem"}} key={index}>{item}</li>
+                              ))
+                            }
+                          </ul>
+                        </li>
+                        <li>
+                          <a>Năm 4</a>
+                          <ul className="nested-sub-menu">
                             {this.renderCourse(4, "/course_management")}
-                            </ul>
-                          </li>
-                       </ul>
-                      </li>
-                      <li>
-                        <a>
+                            {
+                              lessonArr.map((item, index) => (
+                                <li style={{width: "33.33%", padding: "1rem"}} key={index}>{item}</li>
+                              ))
+                            }
+                          </ul>
+                        </li>
+                        <li onClick={this.handleOpen}>
+                          <a>Thêm Khóa học</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a>
                           <i className="fa fa-laptop"></i>
                           <span>
                               Quản lý mật khẩu
@@ -236,24 +347,30 @@ class Library extends Component {
                       <li>
                         <a>
                         <i className="fa fa-laptop"></i>
-                          <span>
-                            Thông tin cá nhân
-                          </span>
+                        <span>Thông tin cá nhân</span>
                         <i className="fa fa-angle-left"></i>
-                        </a>
-                          <ul className="sub-menu">
-                            <li><a>Xem lệ phí - học phí</a></li>
-                            <li><a>Xem lich thi cá nhân</a></li>
-                            <li><a>Tra cứu điểm</a></li>
-                            <li><a>Tra cứu điểm rèn luyện và xử lý học vụ</a></li>
-                            <li><a>Thông tin hồ sơ sinh viên</a></li>
-                          </ul>
-                      </li>
-                      <li>
-                        <a>
-                          Thanh toán online
-                        </a>
+                      </a>
+                      <ul className="sub-menu">
+                        <li>
+                          <a>Xem lệ phí - học phí</a>
                         </li>
+                        <li>
+                          <a>Xem lich thi cá nhân</a>
+                        </li>
+                        <li>
+                          <a>Tra cứu điểm</a>
+                        </li>
+                        <li>
+                          <a>Tra cứu điểm rèn luyện và xử lý học vụ</a>
+                        </li>
+                        <li>
+                          <a>Thông tin hồ sơ sinh viên</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a>Thanh toán online</a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -294,14 +411,13 @@ class Library extends Component {
                               </span>
                             </span>
                           </h4>
-                                  {this.props.children}
-                            </div>
-                       
+                          {this.props.children}
+                        </div>
+
                         {/* END COURSE */}
 
                         {/* table course */}
                         {/* end */}
-
                       </td>
                     </tr>
                   </tbody>
@@ -324,19 +440,20 @@ class Library extends Component {
             </h4>
             <h4 className="footer_content">
               <a id="PageFooter1_GoHome_ibnGoHome" href="../index/index.html">
-                Trang chủ 
-                |
-              </a> 
-                  
-              <a id="PageFooter1_SignOut_ibnLogout" href="../login/login.html">
-              Thoát  | 
+                Trang chủ |
               </a>
-                
-              <a href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/support/default.aspx"
-                target="_blank">
-                 Hỏi đáp  | 
-              </a> 
-               
+
+              <a id="PageFooter1_SignOut_ibnLogout" href="../login/login.html">
+                Thoát |
+              </a>
+
+              <a
+                href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/support/default.aspx"
+                target="_blank"
+              >
+                Hỏi đáp |
+              </a>
+
               <a
                 href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/WebHelp/NewProject1.htm"
                 target="_blank"
@@ -376,6 +493,30 @@ class Library extends Component {
             </tbody>
           </table>
         </footer>
+        <Modal
+          open={this.state.isOpen}
+          onClose={this.handleClose}
+          className={classes.modal}
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+        >
+          <form
+            onSubmit={this.submitLesson}
+            className={classes.paper}
+            noValidate
+            autoComplete="off"
+            style={{ padding: "1rem", width: "200px" }}
+          >
+            <TextField
+              size="small"
+              id="outlined-basic"
+              label="Thêm"
+              variant="outlined"
+              value={this.state.lesson}
+              onChange={this.onChangeInput}
+            />
+          </form>
+        </Modal>
       </Fragment>
     );
   }
@@ -383,14 +524,16 @@ class Library extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    stateOfLibraryReducers: state.getCoursesReducer
-  }
-}
+    stateOfLibraryReducers: state.getCoursesReducer,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCoursesRequest: () => dispatch(getCoursesRequest())
-  }
-} 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Library);
+    getCoursesRequest: () => dispatch(getCoursesRequest()),
+  };
+};
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles, { withTheme: true })
+)(Library);

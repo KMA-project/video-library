@@ -171,7 +171,7 @@ a:hover{
 
 .menu li .sub-menu li a:hover{ color: black; }
 .menu li:hover .sub-menu {
-    max-height: 200px;
+    max-height: 300px;
     /* transform: scaleY(1); */
 }
 

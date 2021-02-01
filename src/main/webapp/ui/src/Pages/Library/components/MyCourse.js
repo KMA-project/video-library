@@ -1,20 +1,66 @@
 import React, { Component } from 'react';
-const url = "http://919ea638de1f.ngrok.io/api/video/stream/mp4";
+import { connect } from "react-redux";
+import { getCourseDetailRequest } from "../actions/LibraryActions";
+import {videoUrl }  from "../../../axios";
+
 class MyCourse extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = { 
+          video: "",
+          lesson: ""
+         }
+    }
+
+    componentDidMount = () => {
+      const { courseId } = this.props.match.params;
+      this.props.getCourseDetailRequest(courseId);
+    }
+
+    componentDidUpdate = (prevProps) => {
+      const { courseId } = this.props.match.params;
+      if (
+        prevProps.match.params.courseId &&
+        courseId !== prevProps.match.params.courseId
+      ) {
+        this.props.getCourseDetailRequest(courseId);
+      }
+    };
+
+    getVideo = (video, lesson) => {
+      this.setState({
+        video,
+        lesson
+      })
     }
     render() { 
+      const {courseDetail} = this.props.stateOfLibraryReducers;
         return ( 
             <div className="myCourses ">
             <div className="video-controls">
-              <video src={`${url}/rO0ABXQARUjGr+G7mk5HIEThuqpOIEdJ4bqiSSBCw4BJIFThuqxQIELDgEkgMS4gxJDhu5hORyBI4buMQyBDSOG6pFQgxJBJ4buCTQ==`} controls allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
-              </video>
+            {/*
+            
+            */}
+            {
+              !this.state.video.videoUrl ? 
+                <video 
+                  controls allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowFullScreen
+                  src={`${videoUrl}/rO0ABXQAVVbhuq10IGzDrSDEkeG6oWkgY8awxqFuZyAtIEdUVlQgLSBMVCBDaMawxqFuZyAxLiDEkOG7mW5nIGjhu41jIGNo4bqldCDEkWnhu4NtLl9UcmltXzE=`}
+                >
+                  </video>
+              :
+              <video 
+                controls allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowFullScreen
+                src={`${videoUrl}/${this.state.video.videoUrl}`}
+              >
+                </video>
+            }
               <div className="scorm-info-wr">
-                <p className="course-section-name">Chương 1. Động học chất điểm</p>
-                <h1 className="scorm-name">Bài 1. Lực-Cân bằng lực</h1>
-                <p className="scorm-play-time">Độ dài: 4:55 phút</p>
+                <p className="course-section-name">{this.state.lesson ? this.state.lesson.lessonName : "Chương 1. Ma trận - định thức"}</p>
+                <h1 className="scorm-name">{this.state.video ? this.state.video.titleName : "Bài 1. Ma trận"}</h1>
+                <p className="scorm-play-time">Độ dài: {this.state.video ? this.state.video.length : "19 phút"}</p>
               </div>
               <ul className="scorm-detail-documents clearfix">
                 <li className="clearfix">
@@ -37,105 +83,49 @@ class MyCourse extends Component {
               <div id="course-outline" className="clearfix">
                 <div className="scroll-wrapper course-outline-wr">
                   <div id="course-outline-main" className="course-outline-wr scroll-content">
-                    <div id="scorm-section-id-1" className="scorm-section-right">
-                      <h3 className="section-right-name">
-                        CHƯƠNG 1:Động học chất điểm
-                      </h3>
-                      <div id="learn-outline-section">
-                        <ul className="learn-outline-list ">
-                          <li className="learn-outline-item">
-                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">
-                              Bài 1: Khái quát về chuyển động cơ học
-                              <div className="lesson-process-wr">
-                              </div>
-                            </a>
-                          </li>
-                          <li className="learn-outline-item">
-                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                              2: Phương trình chuyển động và phương trình quỹ đạo
-                              <div className="lesson-process-wr">
-                              </div>
-                            </a>
-                          </li>
-                          <li className="learn-outline-item">
-                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                              3: Vận tốc của chuyển động
-                              <div className="lesson-process-wr">
-                              </div>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div id="scorm-section-id-2" className="scorm-section-right">
-                      <h3 className="section-right-name">
-                        CHƯƠNG 2:Động lực học chất điểm
-                      </h3>
-                      <div id="learn-outline-section">
-                        <ul className="learn-outline-list ">
-                          <li className="learn-outline-item">
-                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                              1: Các định luật Niu-tơn
-                              <div className="lesson-process-wr">
-                              </div>
-                            </a>
-                          </li>
-                          <li className="learn-outline-item">
-                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                              2: Nguyên lý tương đối Galie
-                              <div className="lesson-process-wr">
-                              </div>
-                            </a>
-                          </li>
-                          <li className="learn-outline-item">
-                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                              3: Lực tác dụng lên chất điểm chuyển động
-                              <div className="lesson-process-wr">
-                              </div>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div id="scorm-section-id-3" className="scorm-section-right">
-                      <h3 className="section-right-name">
-                        CHƯƠNG 3:Chuyển động của hệ chất điểm và vật rắn
-                      </h3>
-                      <div id="learn-outline-section">
-                        <ul className="learn-outline-list ">
-                          <li className="learn-outline-item">
-                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                              1: Các dạng chuyển động của vật rắn
-                              <div className="lesson-process-wr">
-                              </div>
-                            </a>
-                          </li>
-                          <li className="learn-outline-item">
-                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                              2: Chuyển động của khối tâm
-                              <div className="lesson-process-wr">
-                              </div>
-                            </a>
-                          </li>
-                          <li className="learn-outline-item">
-                            <a className="learn-lesson-wr" href="./video/Các dạng vô định cơ bản.mp4">Bài
-                              3: Bài toán va chạm
-                              <div className="lesson-process-wr">
-                              </div>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
+                    {
+                      courseDetail.lessons && courseDetail.lessons.map((lesson, index) => (
+                        <div id="scorm-section-id-1" className="scorm-section-right" key={index}>
+                          <h3 className="section-right-name">
+                            {lesson.lessonName}
+                          </h3>
+                          <div id="learn-outline-section">
+                            <ul className="learn-outline-list ">
+                                {lesson.videos.map((video, videoIndex) => (
+                                  <li className="learn-outline-item" key={videoIndex}>
+                                    <a className="learn-lesson-wr" onClick={() => this.getVideo(video, lesson)}>
+                                      {video.titleName}
+                                      <div className="lesson-process-wr">
+                                      </div>
+                                    </a>
+                                  </li>
+                                ))}
+                                
+                            </ul>
+                          </div>
+                        </div>
+                      ))
+                    }
                   </div>
                 </div>
               </div>
             </div>
-
-          </div>
-                        
+          </div>      
          );
     }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    stateOfLibraryReducers: state.getCoursesReducer,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCourseDetailRequest: (courseId) =>
+      dispatch(getCourseDetailRequest(courseId)),
+  };
+};
  
-export default MyCourse;
+export default connect(mapStateToProps, mapDispatchToProps)(MyCourse);
