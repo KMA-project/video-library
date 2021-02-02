@@ -34,6 +34,23 @@ function* handlePostCoursesRequest(action) {
     }
 }
 
+function* postCoursesRequestGrade() {
+    yield takeEvery(LibraryActions.POST_COURSES_GRADE_REQUEST, handlePostCoursesRequestGrade);
+}
+
+function* handlePostCoursesRequestGrade(action) {
+    try {
+        const {headers, data, statusText} = yield call(LibraryApis.postCourses, action); 
+        // if (statusText === "OK") {
+            yield put(LibraryActions.postCoursesDetailGradeSuccess(data));
+        // }
+
+    } catch (error) {
+        // console.log("reached", error);
+        yield put(LibraryActions.postCoursesDetailGradeError(error));
+    }
+}
+
 
 function* postCoursesRequest() {
     yield takeEvery(LibraryActions.POST_COURSES_REQUEST, handlePostCoursesRequest);
@@ -62,5 +79,6 @@ function* getCourseDetailRequest() {
 export default {
     getCoursesRequest,
     getCourseDetailRequest,
-    postCoursesRequest
+    postCoursesRequest,
+    postCoursesRequestGrade
 }   

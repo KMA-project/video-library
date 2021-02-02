@@ -37,7 +37,23 @@ const getCoursesReducer = (state = initialState, action) => {
     case "POST_COURSES_ERROR":
       return {
         ...state,
-        // isLoading: false,
+        isLoading: false,
+      };
+      case "POST_COURSES_GRADE_REQUEST":
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case "POST_COURSES_GRADE_REQUEST_SUCCESS":
+      return {
+        ...state,
+        courses: action.payload,
+        isLoading: false,
+      };
+    case "POST_COURSES_GRADE_REQUEST_ERROR":
+      return {
+        ...state,
+        isLoading: false,
       };
     case "GET_COURSE_DETAIL_REQUEST":
       return {
