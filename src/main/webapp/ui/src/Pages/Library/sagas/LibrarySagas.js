@@ -34,6 +34,23 @@ function* handlePostCoursesRequest(action) {
     }
 }
 
+function* postCoursesRequestGrade() {
+    yield takeEvery(LibraryActions.POST_COURSES_GRADE_REQUEST, handlePostCoursesRequestGrade);
+}
+
+function* handlePostCoursesRequestGrade(action) {
+    try {
+        const {headers, data, statusText} = yield call(LibraryApis.postCourses, action); 
+        // if (statusText === "OK") {
+            yield put(LibraryActions.postCoursesDetailGradeSuccess(data));
+        // }
+
+    } catch (error) {
+        // console.log("reached", error);
+        yield put(LibraryActions.postCoursesDetailGradeError(error));
+    }
+}
+
 
 function* postCoursesRequest() {
     yield takeEvery(LibraryActions.POST_COURSES_REQUEST, handlePostCoursesRequest);
@@ -59,8 +76,28 @@ function* getCourseDetailRequest() {
 }
 
 
+function* handlePostVideo(action) {
+    try {
+        const {headers, data, statusText} = yield call(LibraryApis.postVideo, action); 
+        // if (statusText === "OK") {
+            yield put(LibraryActions.postVideoSuccess(data));
+        // }
+
+    } catch (error) {
+        // console.log("reached", error);
+        yield put(LibraryActions.postVideoError(error));
+    }
+}
+
+
+function* postVideo() {
+    yield takeEvery(LibraryActions.GET_COURSES_REQUEST, handlePostVideo);
+}
+
 export default {
     getCoursesRequest,
     getCourseDetailRequest,
-    postCoursesRequest
+    postCoursesRequest,
+    postCoursesRequestGrade,
+    postVideo
 }   

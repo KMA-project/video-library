@@ -585,3 +585,11 @@ td {
 .btn-delete{
     background-color: red;
 }
+
+.MuiOutlinedInput-input {
+    padding: 11px 14px !important;
+}
+
+.MuiButton-containedPrimary{
+    margin-left: 40px !important;
+}

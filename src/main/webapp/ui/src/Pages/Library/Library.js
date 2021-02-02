@@ -4,7 +4,7 @@ import "./Library.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { getCoursesRequest } from "./actions/LibraryActions";
+import { getCoursesRequest, postCoursesDetailGradeRequest } from "./actions/LibraryActions";
 import { withStyles } from "@material-ui/core/styles";
 import Screenshot_202329 from "../../assets/img/Screenshot 2020-11-18 202329.png";
 import Screenshot_203722 from "../../assets/img/Screenshot 2020-11-18 203722.png";
@@ -19,7 +19,12 @@ import TableCourse from "./components/TableCourse.js";
 import MyCourse from "./components/MyCourse.js";
 import Content from "./components/Content.js";
 import TextField from "@material-ui/core/TextField";
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 import Modal from "@material-ui/core/Modal";
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 
 const styles = (theme) => ({
   table: {
@@ -37,6 +42,10 @@ const styles = (theme) => ({
     padding: theme.spacing(2, 4, 3),
     width: "700px",
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
 });
 
 const renderCourseData = ["/my_course", "", "/course_management", ""];
@@ -45,7 +54,8 @@ class Library extends Component {
     super(props);
     this.state = {
       isOpen: false,
-      lesson: ""
+      lesson: "",
+      gradeYear: 1
     };
   }
   componentDidMount = () => {
@@ -66,13 +76,19 @@ class Library extends Component {
 
 
   submitLesson = (e) => {
-    e.preventDefault();
-    let lessonArr = [];
-    let temp = JSON.parse(localStorage.getItem("lesson")) || [];
-    temp.push(this.state.lesson);
-    localStorage.setItem("lesson", JSON.stringify(temp));
+    const accountID = JSON.parse(sessionStorage.getItem("account")).accountId;
+    if(this.state.lesson)
+    this.props.postCoursesDetailGradeRequest({courseName: this.state.lesson ,addedBy: accountID, gradeYear: this.state.gradeYear });
     this.setState({
       isOpen: false
+    })
+  }
+
+  onChangeSelect = (e) => {
+    const { value } = e.target;
+
+    this.setState({
+      gradeYear: value
     })
   }
 
@@ -136,6 +152,8 @@ class Library extends Component {
     // console.log(this.props.stateOfLibraryReducers)
     const classes = this.props.classes;
     let lessonArr = JSON.parse(localStorage.getItem("lesson")) || [];
+    const account = JSON.parse(sessionStorage.getItem("account"));
+    const authorities = JSON.parse(sessionStorage.getItem("account")).authorities;
     return (
 
       <Fragment>
@@ -182,11 +200,11 @@ class Library extends Component {
                     id="PageHeader1_lblUserFullName "
                     style={{ fontSize: "10px", fontWeight: "bold" }}
                   >
-                    Huỳnh Hồng Ngọc(AT140628)
+                    {account.fullName}({account.accountName})
                   </span>
                   <span
                     id="PageHeader1_lblRoleTitle"
-                    style={{ color: "black" }}
+                    style={{ color: "black", marginLeft:"5px" }}
                   >
                     Vai trò:
                   </span>
@@ -194,12 +212,14 @@ class Library extends Component {
                     id="PageHeader1_lblUserRole"
                     style={{ color: "Blue", fontSize: "10px" }}
                   >
-                    Sinh viên
+                    { !authorities.includes("ROLE_ADMIN")? 
+                      "Sinh viên": "Quản trị viên"
+                    }
                   </span>
                   <a
                     id="PageHeader1_Newmessage"
                     href="http://qldt.actvn.edu.vn/CMCSoft.IU.Web.Info/MessageSystem/Default.aspx"
-                    style={{ color: "Blue", fontSize: "10px" }}
+                    style={{ color: "Blue", fontSize: "10px", marginLeft: "5px" }}
                   >
                     Hộp tin nhắn
                   </a>
@@ -273,7 +293,7 @@ class Library extends Component {
                       </li>
                     </ul>
                       </li>
-                      <li>
+                      {authorities.includes("ROLE_ADMIN") && <li>
                         <a>
                           <i className="fa fa-laptop"></i>
                           <span>
@@ -329,7 +349,7 @@ class Library extends Component {
                           <a>Thêm Khóa học</a>
                         </li>
                       </ul>
-                    </li>
+                    </li>}
                     <li>
                       <a>
                           <i className="fa fa-laptop"></i>
@@ -499,22 +519,38 @@ class Library extends Component {
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
         >
-          <form
-            onSubmit={this.submitLesson}
+          <div
             className={classes.paper}
-            noValidate
-            autoComplete="off"
-            style={{ padding: "1rem", width: "200px" }}
+            style={{ padding: "1rem", width: "380px", display:"flex" }}
           >
             <TextField
               size="small"
               id="outlined-basic"
               label="Thêm"
               variant="outlined"
+              style= {{marginRight: "15px"}}
               value={this.state.lesson}
               onChange={this.onChangeInput}
             />
-          </form>
+            <FormControl variant="outlined" className={styles.formControl, "FormControl1"}>
+              <InputLabel id="demo-simple-select-outlined-label">Năm</InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                value={this.state.gradeYear}
+                onChange={this.onChangeSelect}
+                label="gradeYear"
+              >
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={3}>3</MenuItem>
+                <MenuItem value={4}>4</MenuItem>
+              </Select>
+            </FormControl>
+            <Button variant="contained" color="primary" onClick={this.submitLesson}>
+              Thêm
+            </Button>
+          </div>
         </Modal>
       </Fragment>
     );
@@ -530,6 +566,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getCoursesRequest: () => dispatch(getCoursesRequest()),
+    postCoursesDetailGradeRequest: (payload) => dispatch(postCoursesDetailGradeRequest(payload)),
   };
 };
 export default compose(

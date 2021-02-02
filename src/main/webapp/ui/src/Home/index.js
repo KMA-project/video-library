@@ -139,9 +139,36 @@ class Home extends Component {
             <div className="content-link">
               <a href="#">Các khoa</a>
             </div>
+            <div className="notification">
             <div className="newNotification">
-              <img src={Image_Notification} alt="" />
+              
+              <h4>THÔNG BÁO MỚI</h4>
+              <ul>
+                <li>
+                  <a href="http://actvn.edu.vn/thong-bao-vv-dieu-chinh-lich-nghi-tet-nguyen-dan-tan-suu-nam-2021-cua-sinh-vien-he-dao-tao-dong-hoc-phi-190524.html">THÔNG BÁO V/v điều chỉnh lịch nghỉ Tết Nguyên đán Tân Sửu năm 2021 của sinh viên Hệ đào tạo đóng học phí</a>
+                </li>
+                <li>
+                  <a href="http://actvn.edu.vn/khoa-attt-thong-bao-ve-viec-quan-ly-thuc-tap-tot-nghiep-va-do-an-sinh-vien-khoa-at13-190522.html">Khoa ATTT thông báo về việc quản lý thực tập tốt nghiệp và đồ án sinh viên khoá AT13</a>
+                </li>
+                <li>
+                  <a href="http://actvn.edu.vn/quyet-dinh-vv-cap-hoc-bong-hoc-ky-2-nam-hoc-2019-2020-cho-cac-sinh-vien-dai-hoc-he-chinh-quy-nganh-at-tt-cn-tt-dt-vt-190521.html">QUYẾT ĐỊNH: V/v cấp học bổng học kỳ 2 năm học 2019 - 2020 cho các sinh viên  đại học hệ chính quy ngành AT-TT, CN-TT, ĐT-VT</a>
+                </li>
+                <li>
+                  <a href="http://actvn.edu.vn/thong-bao-vv-dieu-chinh-lich-nghi-tet-nguyen-dan-tan-suu-nam-2021-cua-sinh-vien-he-dao-tao-dong-hoc-phi-190524.html">THÔNG BÁO: V/v thu tiền học phí học kỳ II năm học 2020-2021</a>
+                </li>
+                <li>
+                  <a href="http://actvn.edu.vn/thong-bao-vv-dieu-chinh-lich-nghi-tet-nguyen-dan-tan-suu-nam-2021-cua-sinh-vien-he-dao-tao-dong-hoc-phi-190524.html">THÔNG BÁO V/v hướng dẫn đăng ký đề tài đồ án cho ngày 21/01/2021 và danh sách đề tài</a>
+                </li>
+                <li>
+                  <a href="http://actvn.edu.vn/thong-bao-vv-dieu-chinh-lich-nghi-tet-nguyen-dan-tan-suu-nam-2021-cua-sinh-vien-he-dao-tao-dong-hoc-phi-190524.html">THÔNG BÁO V/v hoãn mở lớp học phần thuộc các ngành An toàn thông tin, Công nghệ thông tin và Kỹ thuật điện tử viễn thông</a>
+                </li>
+              </ul>
             </div>
+            </div>
+
+            
+           
+           
           </div>
         </div>
 
@@ -223,9 +250,9 @@ class Home extends Component {
                 <a href="http://actvn.edu.vn" title="Trang chủ">
                   Trang chủ
                 </a>{" "}
-                |
+                | 
                 <a href="" title="Giới thiệu">
-                  Giới thiệu
+                   Giới thiệu
                 </a>{" "}
                 |
                 <a

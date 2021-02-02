@@ -16,12 +16,13 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import callAPI from "../../../axios";
+import { videoUrl } from "../../../axios";
 class ModalForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      videoName: "",
-      video: ""
+      videoName: this.props.video?.titleName,
+      video: this.props.video
     };
   }
 
@@ -42,15 +43,13 @@ class ModalForm extends Component {
     });
   };
 
-  getVideo = async (item) => {
-    const  {data}  = await callAPI(`video/stream/mp4/${item.urlName}`, "GET");
-    this.setState({ 
-      video: data
-    })
+  getVideo = (item) => {
+    const {handleSetState} = this.props;
+    handleSetState(item)
   };
   render() {
-    const { lesson } = this.props;
-    console.log(this.state.video);
+    const { courseDetail, lesson } = this.props;
+    console.log(this.state)
     return (
       <Modal
         aria-labelledby="transition-modal-title"
@@ -66,7 +65,7 @@ class ModalForm extends Component {
         <Fade in={this.props.isOpen}>
           <div className={this.props.classes.paper}>
             <h1 style={{ textAlign: "center" }}>Chọn bài học</h1>
-            <form>
+            <div>
               <TextField
                 id="outlined-search"
                 label="Tên chương học"
@@ -96,18 +95,16 @@ class ModalForm extends Component {
                     <MenuItem
                       key={index}
                       value={video.titleName}
-                      onClick={() => this.getVideo(video)}
+                      onClick={() => this.getVideo(video.videoUrl)}
                     >
                       {video.titleName}
                     </MenuItem>
                   ))}
                 </Select>
               </FormControl>
-            </form>
-            <video width="320" height="240" controls>
-              <source src={this.state.video} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            </div>
+            {this.state.video && <video width="320" height="240" src={videoUrl + "/" + this.state.video}>
+            </video>}
           </div>
         </Fade>
       </Modal>
