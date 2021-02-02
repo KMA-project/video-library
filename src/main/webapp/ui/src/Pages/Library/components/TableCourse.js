@@ -268,12 +268,13 @@ class TableCourse extends Component {
               value={this.state.nameAddLesson}
               onChange={this.onChangeInputAdd}
             />
-            <div>
+            <div className="uploadVideo">
                 <input ref={this.inputOpenFileRef} onChange={this.pushVideo} type="file" style={{ display: "none" }} accept="video/mp4,video/x-m4v"/>
-                <button onClick={this.showOpenFileDlg}>Tải Video</button>
+                <button onClick={this.showOpenFileDlg} className="downloadVideo">Tải Video</button>
                 {this.state.nameFile}
+                <Button className="addcourse" onClick={this.onClick1} variant="contained">Thêm bài học</Button>
             </div>
-            <Button onClick={this.onClick1} variant="contained">Thêm bài học</Button>
+            
             </div>
         </Modal>
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "https://a9af14283018.ngrok.io/api";
+const url = "http://d052ccd682a8.ngrok.io/api";
 const backUp = "https://5dc9138dd53a7d00149cebd0.mockapi.io/api"; 
 export const videoUrl = "https://a9af14283018.ngrok.io/api/video/stream/mp4";
 export default function callAPI(
