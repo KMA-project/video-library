@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface CourseRepository extends JpaRepository<Course,Integer> {
 
     @Query("SELECT NEW com.kma.libraby.service.dto.ui.CourseDTO(" +
-            "c.courseId,c.courseName,c.gradeYear,c.active) " +
+            "c.courseId,c.courseName,c.addedBy,c.gradeYear,c.active) " +
             "FROM Course c ORDER BY c.gradeYear ASC ")
     List<CourseDTO> findAllCourseView();
 

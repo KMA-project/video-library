@@ -189,8 +189,8 @@ class TableCourse extends Component {
             <TableHead>
               <TableRow>
                 <TableCell>Khóa học</TableCell>
-                <TableCell align="center">Chó Ngọc</TableCell>
-                <TableCell align="center">Chi tiết</TableCell>
+                {/* <TableCell align="center">Chó Ngọc</TableCell>
+                <TableCell align="center">Chi tiết</TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>{this.renderLesson(courseDetail)}</TableBody>

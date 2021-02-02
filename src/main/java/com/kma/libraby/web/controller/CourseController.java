@@ -49,15 +49,15 @@ public class CourseController {
         return ResponseEntity.ok(courseService.addLesson(lesson,courseId));
     }
 
-    @PostMapping("/courses")
-    public ResponseEntity<Course> saveCategory(@RequestBody Course course) throws URISyntaxException {
-        if (course.getCourseId() != 0) {
-            throw new BadRequestAlertException(String.valueOf(course.getCourseId()));
+    @PostMapping("/courses/courseId")
+    public ResponseEntity<Course> saveCategory(@RequestBody CourseDTO courseDTO) throws URISyntaxException {
+        if (courseDTO.getCourseId() != 0) {
+            throw new BadRequestAlertException(String.valueOf(courseDTO.getCourseId()));
         }
         else {
-            Course newCourse = courseService.addCourse(course);
+            Course newCourse = courseService.addCourse(courseDTO);
             return ResponseEntity.created(
-                    new URI(ApplicationConstants.BASE_URL+"/courses/"+course.getCourseId()))
+                    new URI(ApplicationConstants.BASE_URL+"/courses/"+courseDTO.getCourseId()))
                     .body(newCourse);
         }
     }

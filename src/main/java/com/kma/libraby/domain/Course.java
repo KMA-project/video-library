@@ -1,7 +1,6 @@
 package com.kma.libraby.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,10 +34,8 @@ public class Course implements Serializable {
 
     private boolean active;
 
-    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by")
-    @JsonIgnore
-    private Account createdBy;
+    @Column(name = "added_by",length = 37)
+    private String addedBy;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "belong_to")
     @JsonIgnore

@@ -25,6 +25,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin("http://localhost:3000")
+//@CrossOrigin("https://kma-elearning.000webhostapp.com")
 public class UserJWTController {
     @Autowired
     private AuthenticationManager authenticationManager;
