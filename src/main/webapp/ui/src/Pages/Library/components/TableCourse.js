@@ -101,7 +101,7 @@ class TableCourse extends Component {
     const account = sessionStorage.getItem("account"); 
     const id = JSON.parse(account).accountId
     if(e.which === 13 && this.state.lesson){
-      this.closeForm()
+      
       this.props.handlePostCoursesRequest(courseId, {lessonName: this.state.lesson,addedBy: id})
     }
   }

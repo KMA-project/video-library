@@ -4,7 +4,7 @@ import "./Library.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { getCoursesRequest } from "./actions/LibraryActions";
+import { getCoursesRequest, postCoursesDetailGradeRequest } from "./actions/LibraryActions";
 import { withStyles } from "@material-ui/core/styles";
 import Screenshot_202329 from "../../assets/img/Screenshot 2020-11-18 202329.png";
 import Screenshot_203722 from "../../assets/img/Screenshot 2020-11-18 203722.png";
@@ -24,6 +24,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Modal from "@material-ui/core/Modal";
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 
 const styles = (theme) => ({
   table: {
@@ -75,11 +76,9 @@ class Library extends Component {
 
 
   submitLesson = (e) => {
-    e.preventDefault();
-    let lessonArr = [];
-    let temp = JSON.parse(localStorage.getItem("lesson")) || [];
-    temp.push(this.state.lesson);
-    localStorage.setItem("lesson", JSON.stringify(temp));
+    const accountID = JSON.parse(sessionStorage.getItem("account")).accountId;
+    if(this.state.lesson)
+    this.props.postCoursesDetailGradeRequest({courseName: this.state.lesson ,addedBy: accountID, gradeYear: this.state.gradeYear });
     this.setState({
       isOpen: false
     })
@@ -520,12 +519,9 @@ class Library extends Component {
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
         >
-          <form
-            onSubmit={this.submitLesson}
+          <div
             className={classes.paper}
-            noValidate
-            autoComplete="off"
-            style={{ padding: "1rem", width: "300px", display:"flex" }}
+            style={{ padding: "1rem", width: "380px", display:"flex" }}
           >
             <TextField
               size="small"
@@ -551,7 +547,10 @@ class Library extends Component {
                 <MenuItem value={4}>4</MenuItem>
               </Select>
             </FormControl>
-          </form>
+            <Button variant="contained" color="primary" onClick={this.submitLesson}>
+              Thêm
+            </Button>
+          </div>
         </Modal>
       </Fragment>
     );
@@ -567,6 +566,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getCoursesRequest: () => dispatch(getCoursesRequest()),
+    postCoursesDetailGradeRequest: (payload) => dispatch(postCoursesDetailGradeRequest(payload)),
   };
 };
 export default compose(
