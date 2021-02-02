@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { getCourseDetailRequest } from "../actions/LibraryActions";
+import { getCourseDetailRequest, postCoursesRequest } from "../actions/LibraryActions";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -22,6 +22,7 @@ import FormControl from "@material-ui/core/FormControl";
 // icon
 import ModalForm from "./ModalForm";
 import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import callAPI from "../../../axios";
 const styles = (theme) => ({
@@ -52,7 +53,7 @@ class TableCourse extends Component {
     this.state = {
       isOpen: false,
       isFormOpen: false,
-      lesson: {},
+      lesson: "",
       lessonField: {}
     };
   }
@@ -96,19 +97,20 @@ class TableCourse extends Component {
     }
   };
 
-  componentWillUnmount = () => {
-    console.log("Destroy!");
-  };
-
-  submitLesson = (e) => {
-
+  submitLesson = (e, courseId) => {
+    const account = sessionStorage.getItem("account"); 
+    const id = JSON.parse(account).accountId
+    if(e.which === 13 && this.state.lesson){
+      this.closeForm()
+      this.props.handlePostCoursesRequest(courseId, {lessonName: this.state.lesson,addedBy: id})
+    }
   }
 
   onChangeInput = (e) => {
     const { value } = e.target;
 
     this.setState({
-      lessonField: {} 
+      lesson: value
     })
   }
 
@@ -119,7 +121,15 @@ class TableCourse extends Component {
           <TableCell component="th" scope="row">
             {lesson.lessonName}
           </TableCell>
-          <TableCell align="center">Ngọc ngu</TableCell>
+          <TableCell align="center"> 
+          <Button
+              variant="contained"
+              color="secondary"
+              style={{ minWidth: "0", padding: "6px 12px" }}
+              onClick={() => this.handleOpen(lesson)}
+            >
+                <DeleteIcon />
+            </Button>     </TableCell>
           <TableCell align="center">
             <Button
               variant="contained"
@@ -137,8 +147,8 @@ class TableCourse extends Component {
 
   render() {
     const classes = this.props.classes;
-    const { courseDetail } = this.props.stateOfLibraryReducers;
-    // console.log(this.state.lesson);
+    const { courseDetail, isLoading } = this.props.stateOfLibraryReducers;
+    if(isLoading) return <div className="loading-login-page">...Loading</div>;
     return (
       <Fragment>
         {this.state.isOpen && (
@@ -158,22 +168,17 @@ class TableCourse extends Component {
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
         >
-          <form
-            onSubmit={this.submitLesson}
-            className={classes.paper}
-            noValidate
-            autoComplete="off"
-            style={{ padding: "1rem", width: "200px" }}
-          >
+          <div className={classes.paper} style={{ padding: "1rem", width: "200px" }}>
             <TextField
               size="small"
               id="outlined-basic"
+              onKeyPress={(e) =>this.submitLesson(e, courseDetail.courseId)}
               label="Thêm"
               variant="outlined"
               value={this.state.lesson}
               onChange={this.onChangeInput}
             />
-          </form>
+            </div>
         </Modal>
 
         <TableContainer component={Paper}>
@@ -189,7 +194,7 @@ class TableCourse extends Component {
             <TableHead>
               <TableRow>
                 <TableCell>Khóa học</TableCell>
-                <TableCell align="center">Chó Ngọc</TableCell>
+                <TableCell align="center">Xóa</TableCell>
                 <TableCell align="center">Chi tiết</TableCell>
               </TableRow>
             </TableHead>
@@ -211,6 +216,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getCourseDetailRequest: (courseId) =>
       dispatch(getCourseDetailRequest(courseId)),
+    handlePostCoursesRequest: (courseId, payload) =>
+      dispatch(postCoursesRequest(courseId, payload)),
   };
 };
 

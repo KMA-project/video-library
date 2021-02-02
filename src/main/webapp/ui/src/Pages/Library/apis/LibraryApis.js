@@ -7,3 +7,8 @@ export const getCourses = () => {
 export const getCourseDetail = (courseId) => {
     return callAPI(`courses/${courseId}`, "GET");
 }
+
+
+export const postCourseDetail = (action) => {
+    return callAPI(`courses/${action.id}`, "POST", action.payload);
+}
