@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, createRef, Fragment } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { getCourseDetailRequest, postCoursesRequest } from "../actions/LibraryActions";
+import { getCourseDetailRequest, postCoursesRequest, postVideoRequest } from "../actions/LibraryActions";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -23,6 +23,7 @@ import FormControl from "@material-ui/core/FormControl";
 import ModalForm from "./ModalForm";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
 
 import callAPI from "../../../axios";
 const styles = (theme) => ({
@@ -53,15 +54,21 @@ class TableCourse extends Component {
     this.state = {
       isOpen: false,
       isFormOpen: false,
+      isAddVideoForm: false,
+      lessonABC: "",
       lesson: "",
-      lessonField: {}
+      video: "",
+      lessonField: {},
+      nameAddLesson: "",
+      nameFile: ""
     };
+    this.inputOpenFileRef = React.createRef()
   }
 
   handleOpen = (lesson) => {
     this.setState({
       isOpen: true,
-      lesson,
+      lessonField: lesson,
     });
   };
 
@@ -106,12 +113,64 @@ class TableCourse extends Component {
     }
   }
 
+  pushVideo = (e) => {
+    if(e.target.files){
+      var reader=new FileReader();
+      var file = e.target.files[0];
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload=(event)=>{
+        this.setState({
+          nameFile: file.name,
+          file: event.target.result
+        })
+      }
+    }
+  }
+
+  onChangeInputAdd = (e) => {
+    const { value } = e.target;
+
+    this.setState({
+      nameAddLesson: value
+    })
+  }
+
   onChangeInput = (e) => {
     const { value } = e.target;
 
     this.setState({
       lesson: value
     })
+  }
+  handleOpenAddForm = (lesson) => {
+    this.setState({
+      isAddVideoForm: true,
+      lessonABC: lesson
+    })
+  }
+
+  showOpenFileDlg = () => {
+    this.inputOpenFileRef.current.click()
+}
+
+  handleCloseAddForm = (e) => {
+    this.setState({
+      isAddVideoForm: true
+    })
+  }
+
+  handleSetState = (value) => {
+    this.setState({
+      video: value
+    })
+  }
+
+  onClick1 = () => {
+    const {lessonABC} = this.state
+    const accountID = JSON.parse(sessionStorage.getItem("account")).accountId;
+    const arrr = this.props.location.pathname.split('/')
+    const num = Number(arrr[arrr.length-1])
+    this.props.postVideoRequest({video: this.state.file,tittleName: this.state.nameAddLesson, lessonId: lessonABC.lessonId, belong_to: num, addedBy: accountID})
   }
 
   renderLesson = (courseDetail) => {
@@ -121,15 +180,15 @@ class TableCourse extends Component {
           <TableCell component="th" scope="row">
             {lesson.lessonName}
           </TableCell>
-          <TableCell align="center"> 
-          <Button
+          <TableCell align="center">
+            <Button
               variant="contained"
-              color="secondary"
               style={{ minWidth: "0", padding: "6px 12px" }}
-              onClick={() => this.handleOpen(lesson)}
+              onClick={() => this.handleOpenAddForm(lesson)}
             >
-                <DeleteIcon />
-            </Button>     </TableCell>
+              <AddIcon />
+            </Button>
+          </TableCell>
           <TableCell align="center">
             <Button
               variant="contained"
@@ -140,6 +199,16 @@ class TableCourse extends Component {
               <EditIcon />
             </Button>
           </TableCell>
+          <TableCell align="center"> 
+          <Button
+              variant="contained"
+              color="secondary"
+              style={{ minWidth: "0", padding: "6px 12px" }}
+              // onClick={() => this.handleOpen(lesson)}
+            >
+                <DeleteIcon />
+            </Button>     </TableCell>
+          
         </TableRow>
       ));
     }
@@ -153,8 +222,10 @@ class TableCourse extends Component {
       <Fragment>
         {this.state.isOpen && (
           <ModalForm
-            lesson={this.state.lesson}
+            lesson={this.state.lessonField}
+            video={this.state.video}
             courseDetail={courseDetail}
+            handleSetState= {this.handleSetState}
             isOpen={this.state.isOpen}
             handleClose={this.handleClose}
             classes={classes}
@@ -181,6 +252,31 @@ class TableCourse extends Component {
             </div>
         </Modal>
 
+        <Modal
+          open={this.state.isAddVideoForm}
+          onClose={this.handleCloseAddForm}
+          className={classes.modal}
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+        >
+          <div className={classes.paper} style={{ padding: "1rem", width: "400px", display: "flex", flexDirection: "column" }}>
+            <TextField
+              size="small"
+              id="outlined-basic"
+              label="Tên bài học"
+              variant="outlined"
+              value={this.state.nameAddLesson}
+              onChange={this.onChangeInputAdd}
+            />
+            <div>
+                <input ref={this.inputOpenFileRef} onChange={this.pushVideo} type="file" style={{ display: "none" }} accept="video/mp4,video/x-m4v"/>
+                <button onClick={this.showOpenFileDlg}>Tải Video</button>
+                {this.state.nameFile}
+            </div>
+            <Button onClick={this.onClick1} variant="contained">Thêm bài học</Button>
+            </div>
+        </Modal>
+
         <TableContainer component={Paper}>
           <Button
             style={{ margin: "1rem" }}
@@ -194,8 +290,9 @@ class TableCourse extends Component {
             <TableHead>
               <TableRow>
                 <TableCell>Khóa học</TableCell>
-                <TableCell align="center">Xóa</TableCell>
+                <TableCell align="center">Thêm bài học</TableCell>
                 <TableCell align="center">Chi tiết</TableCell>
+                <TableCell align="center">Xóa</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>{this.renderLesson(courseDetail)}</TableBody>
@@ -218,6 +315,9 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getCourseDetailRequest(courseId)),
     handlePostCoursesRequest: (courseId, payload) =>
       dispatch(postCoursesRequest(courseId, payload)),
+      postVideoRequest: (payload) =>{
+        dispatch(postVideoRequest(payload))
+      }
   };
 };
 
