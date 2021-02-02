@@ -56,9 +56,10 @@ public class CourseService {
         Course course = new Course();
         course.setCourseId(0);
         course.setActive(true);
+        course.setCourseName(courseDTO.getCourseName());
         course.setAddedBy(courseDTO.getAddedBy());
+        course.setGradeYear(courseDTO.getGradeYear());
         course.setCreatedDate(timestamp);
-//        course.setGradeYear();
         return courseRepository.save(course);
     }
 

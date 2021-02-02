@@ -133,7 +133,6 @@ class Library extends Component {
   // }
 
   render() {
-    // const { courses } = this.props.stateOfLibraryReducers;
     // console.log(this.props.stateOfLibraryReducers)
     const classes = this.props.classes;
     let lessonArr = JSON.parse(localStorage.getItem("lesson")) || [];

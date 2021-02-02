@@ -24,6 +24,7 @@ public class AccountService{
                 .map(Optional::get)
                 .map(account -> new AccountDTO(
                         account.getAccountId(),
+                        account.getAccountName(),
                         account.getFullName(),
                         account.isActive(),
                         account.getRoles().stream().map(Role::getRoleName).collect(Collectors.toList())));

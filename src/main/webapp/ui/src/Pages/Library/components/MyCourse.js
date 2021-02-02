@@ -12,7 +12,7 @@ class MyCourse extends Component {
          }
     }
 
-    componentDidMount = () => {
+    componentWillMount = () => {
       const { courseId } = this.props.match.params;
       this.props.getCourseDetailRequest(courseId);
     }
@@ -27,6 +27,13 @@ class MyCourse extends Component {
       }
     };
 
+    componentWillReceiveProps(nextProps){
+      const {courseDetail} = nextProps.stateOfLibraryReducers;
+      if(courseDetail && JSON.stringify(courseDetail) !== '{}' && courseDetail !== this.props.stateOfLibraryReducers.courseDetail){
+        this.getVideo(courseDetail.lessons[0].videos[0], courseDetail.lessons[0])
+      }
+    }
+
     getVideo = (video, lesson) => {
       this.setState({
         video,
@@ -35,6 +42,9 @@ class MyCourse extends Component {
     }
     render() { 
       const {courseDetail} = this.props.stateOfLibraryReducers;
+      if(!this.state.video && !this.state.lesson && JSON.stringify(courseDetail) !== '{}'){
+        this.getVideo(courseDetail.lessons[0].videos[0], courseDetail.lessons[0])
+      }
         return ( 
             <div className="myCourses ">
             <div className="video-controls">
@@ -46,14 +56,14 @@ class MyCourse extends Component {
                 <video 
                   controls allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                   allowFullScreen
-                  src={`${videoUrl}/rO0ABXQAVVbhuq10IGzDrSDEkeG6oWkgY8awxqFuZyAtIEdUVlQgLSBMVCBDaMawxqFuZyAxLiDEkOG7mW5nIGjhu41jIGNo4bqldCDEkWnhu4NtLl9UcmltXzE=`}
+                  src={videoUrl + "/" + this.state.video.videoUrl}
                 >
                   </video>
               :
               <video 
                 controls allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowFullScreen
-                src={`${videoUrl}/${this.state.video.videoUrl}`}
+                src={videoUrl + "/" + this.state.video.videoUrl}
               >
                 </video>
             }

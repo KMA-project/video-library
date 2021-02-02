@@ -10,15 +10,31 @@ const getCoursesReducer = (state = initialState, action) => {
     case "GET_COURSES_REQUEST":
       return {
         ...state,
-        // isLoading: true,
+        isLoading: true,
       };
     case "GET_COURSES_SUCCESS":
       return {
         ...state,
         courses: action.payload,
-        // isLoading: false,
+        isLoading: false,
       };
     case "GET_COURSES_ERROR":
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case "POST_COURSES_REQUEST":
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case "POST_COURSES_SUCCESS":
+      return {
+        ...state,
+        courseDetail: action.payload,
+        isLoading: false,
+      };
+    case "POST_COURSES_ERROR":
       return {
         ...state,
         // isLoading: false,
@@ -26,18 +42,18 @@ const getCoursesReducer = (state = initialState, action) => {
     case "GET_COURSE_DETAIL_REQUEST":
       return {
         ...state,
-        // isLoading: true,
+        isLoading: true,
       };
     case "GET_COURSE_DETAIL_SUCCESS":
       return {
         ...state,
         courseDetail: action.payload,
-        // isLoading: false,
+        isLoading: false,
       };
     case "GET_COURSE_DETAIL_ERROR":
       return {
         ...state,
-        // isLoading: false,
+        isLoading: false,
       };
     default:
       return state;

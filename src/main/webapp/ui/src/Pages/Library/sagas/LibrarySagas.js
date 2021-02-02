@@ -21,6 +21,24 @@ function* getCoursesRequest() {
     yield takeEvery(LibraryActions.GET_COURSES_REQUEST, handleGetCoursesRequest);
 }
 
+function* handlePostCoursesRequest(action) {
+    try {
+        const {headers, data, statusText} = yield call(LibraryApis.postCourseDetail, action); 
+        // if (statusText === "OK") {
+            yield put(LibraryActions.postCoursesSuccess(data));
+        // }
+
+    } catch (error) {
+        // console.log("reached", error);
+        yield put(LibraryActions.postCoursesError(error));
+    }
+}
+
+
+function* postCoursesRequest() {
+    yield takeEvery(LibraryActions.POST_COURSES_REQUEST, handlePostCoursesRequest);
+}
+
 function* handleGetCourseDetailRequest(action) {
     try {
         const {headers, data, statusText} = yield call(LibraryApis.getCourseDetail, action.payload); 
@@ -43,5 +61,6 @@ function* getCourseDetailRequest() {
 
 export default {
     getCoursesRequest,
-    getCourseDetailRequest
+    getCourseDetailRequest,
+    postCoursesRequest
 }   

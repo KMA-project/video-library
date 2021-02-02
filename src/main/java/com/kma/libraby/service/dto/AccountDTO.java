@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class AccountDTO implements Serializable {
     private String accountId;
+    private String accountName;
     private String fullName;
     private boolean active;
     private List<String> authorities;
