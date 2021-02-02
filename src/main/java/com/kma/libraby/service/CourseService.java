@@ -2,6 +2,7 @@ package com.kma.libraby.service;
 
 import com.kma.libraby.domain.Course;
 import com.kma.libraby.domain.Lesson;
+import com.kma.libraby.repository.AccountRepository;
 import com.kma.libraby.repository.CourseRepository;
 import com.kma.libraby.repository.LessonRepository;
 import com.kma.libraby.service.dto.ui.CourseDTO;
@@ -22,6 +23,9 @@ public class CourseService {
 
     @Autowired
     private LessonRepository lessonRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     public List<CourseDTO> getAll(){
         return courseRepository.findAllCourseView();
@@ -47,7 +51,15 @@ public class CourseService {
         return courseFind.get();
     }
 
-    public Course addCourse(Course course){
+    public Course addCourse(CourseDTO courseDTO){
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        Course course = new Course();
+        course.setCourseId(0);
+        course.setActive(true);
+        course.setCourseName(courseDTO.getCourseName());
+        course.setAddedBy(courseDTO.getAddedBy());
+        course.setGradeYear(courseDTO.getGradeYear());
+        course.setCreatedDate(timestamp);
         return courseRepository.save(course);
     }
 

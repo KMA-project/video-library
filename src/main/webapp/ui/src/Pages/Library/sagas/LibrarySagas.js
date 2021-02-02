@@ -76,9 +76,28 @@ function* getCourseDetailRequest() {
 }
 
 
+function* handlePostVideo(action) {
+    try {
+        const {headers, data, statusText} = yield call(LibraryApis.postVideo, action); 
+        // if (statusText === "OK") {
+            yield put(LibraryActions.postVideoSuccess(data));
+        // }
+
+    } catch (error) {
+        // console.log("reached", error);
+        yield put(LibraryActions.postVideoError(error));
+    }
+}
+
+
+function* postVideo() {
+    yield takeEvery(LibraryActions.GET_COURSES_REQUEST, handlePostVideo);
+}
+
 export default {
     getCoursesRequest,
     getCourseDetailRequest,
     postCoursesRequest,
-    postCoursesRequestGrade
+    postCoursesRequestGrade,
+    postVideo
 }   

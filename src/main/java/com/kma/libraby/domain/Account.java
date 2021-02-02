@@ -45,8 +45,4 @@ public class Account implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "createdBy")
-    @JsonIgnore
-    private Set<Course> courses;
-
 }

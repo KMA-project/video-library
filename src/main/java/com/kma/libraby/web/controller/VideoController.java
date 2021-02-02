@@ -1,10 +1,14 @@
 package com.kma.libraby.web.controller;
 
 import com.kma.libraby.constants.ApplicationConstants;
+import com.kma.libraby.domain.Course;
 import com.kma.libraby.domain.Video;
+import com.kma.libraby.service.CourseService;
 import com.kma.libraby.service.VideoStreamService;
 import com.kma.libraby.service.dto.ui.VideoUploadDTO;
 import com.kma.libraby.web.errors.BadRequestAlertException;
+import com.kma.libraby.web.errors.ErrorConstants;
+import com.kma.libraby.web.errors.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +26,10 @@ import java.util.Optional;
 public class VideoController {
 
     @Autowired
-    VideoStreamService videoStreamService;
+    private VideoStreamService videoStreamService;
+
+    @Autowired
+    private CourseService courseService;
 
     @GetMapping("/video/stream/{fileType}/{fileName}")
     public Mono<ResponseEntity<byte[]>> streamVideo(@RequestHeader(value = "Range", required = false) String httpRangeList,
@@ -33,15 +40,14 @@ public class VideoController {
 
     @PostMapping("/videos")//Add new Video
 //    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Video> saveCategory(@ModelAttribute VideoUploadDTO videoUploadDTO) throws URISyntaxException {
+    public ResponseEntity<Course> saveCategory(@ModelAttribute VideoUploadDTO videoUploadDTO) throws URISyntaxException {
+        VideoUploadDTO videoUploadDTO1 = videoUploadDTO;
         if (videoUploadDTO.getVideoId() != 0) {
             throw new BadRequestAlertException(String.valueOf(videoUploadDTO.getVideoId()));
         }
         else {
-            Video newVideo = videoStreamService.addVideo(videoUploadDTO);
-            return ResponseEntity.created(
-                    new URI(ApplicationConstants.BASE_URL+"/videos/"+videoUploadDTO.getVideoId()))
-                    .body(newVideo);
+            videoStreamService.addVideo(videoUploadDTO);
+            return ResponseEntity.ok(courseService.findById(videoUploadDTO.getBelong_to()).get());
         }
     }
 

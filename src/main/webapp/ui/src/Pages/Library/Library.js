@@ -532,7 +532,7 @@ class Library extends Component {
               value={this.state.lesson}
               onChange={this.onChangeInput}
             />
-            <FormControl variant="outlined" className={styles.formControl}>
+            <FormControl variant="outlined" className={styles.formControl, "FormControl1"}>
               <InputLabel id="demo-simple-select-outlined-label">Năm</InputLabel>
               <Select
                 labelId="demo-simple-select-outlined-label"

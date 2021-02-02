@@ -17,3 +17,8 @@ export const postCourseDetail = (action) => {
 export const postCourses = (action) => {
     return callAPI(`courses/grade`, "POST", action.payload);
 }
+
+
+export const postVideo = (action) => {
+    return callAPI(`videos`, "POST", action.payload);
+}

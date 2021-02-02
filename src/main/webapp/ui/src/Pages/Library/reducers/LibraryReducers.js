@@ -71,6 +71,22 @@ const getCoursesReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
       };
+    case "POST_VIDEO":
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case "POST_VIDEO_SUCCESS":
+      return {
+        ...state,
+        courseDetail: action.payload,
+        isLoading: false,
+      };
+    case "POST_VIDEO_ERROR":
+      return {
+        ...state,
+        isLoading: false,
+      };
     default:
       return state;
   }

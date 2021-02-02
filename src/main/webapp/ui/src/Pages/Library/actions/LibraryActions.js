@@ -10,6 +10,9 @@ export const GET_COURSE_DETAIL_ERROR = "GET_COURSE_DETAIL_ERROR";
 export const POST_COURSES_GRADE_REQUEST = "POST_COURSES_GRADE_REQUEST";
 export const POST_COURSES_GRADE_REQUEST_SUCCESS = "POST_COURSES_GRADE_REQUEST_SUCCESS";
 export const POST_COURSES_GRADE_REQUEST_ERROR = "POST_COURSES_GRADE_REQUEST_ERROR";
+export const POST_VIDEO = "POST_VIDEO";
+export const POST_VIDEO_SUCCESS = "POST_VIDEO_SUCCESS";
+export const POST_VIDEO_ERROR = "POST_VIDEO_ERROR";
 
 
 export const getCoursesRequest = (payload) => ({
@@ -73,5 +76,21 @@ export const getCourseDetailSuccess = (data) => ({
 
 export const getCourseDetailError = (error) => ({
     type: GET_COURSE_DETAIL_ERROR,
+    payload: error
+})
+
+
+export const postVideoRequest = (payload) => ({
+    type: POST_VIDEO,
+    payload
+})
+
+export const postVideoSuccess = (payload) => ({
+    type: POST_VIDEO_SUCCESS,
+    payload
+})
+
+export const postVideoError = (error) => ({
+    type: POST_VIDEO_ERROR,
     payload: error
 })

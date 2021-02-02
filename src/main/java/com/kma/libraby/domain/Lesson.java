@@ -22,7 +22,7 @@ public class Lesson {
     @Column(name = "lesson_id")
     private int lessonId;
 
-    @Column(name = "lesson_name",length = 150,nullable = false)
+    @Column(name = "lesson_name",length = 150)
     private String lessonName;
 
     @Column(name = "created_date")
