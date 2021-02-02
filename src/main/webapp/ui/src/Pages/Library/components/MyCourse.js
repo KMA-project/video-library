@@ -30,7 +30,9 @@ class MyCourse extends Component {
     componentWillReceiveProps(nextProps){
       const {courseDetail} = nextProps.stateOfLibraryReducers;
       if(courseDetail && JSON.stringify(courseDetail) !== '{}' && courseDetail !== this.props.stateOfLibraryReducers.courseDetail){
-        this.getVideo(courseDetail.lessons[0].videos[0], courseDetail.lessons[0])
+        const video = courseDetail.lessons.length > 0 ? courseDetail.lessons[0].videos[0] : "";
+        const lesson = courseDetail.lessons.length > 0 ? courseDetail.lessons[0] : "";
+        this.getVideo(video, lesson)
       }
     }
 
@@ -41,10 +43,14 @@ class MyCourse extends Component {
       })
     }
     render() { 
-      const {courseDetail} = this.props.stateOfLibraryReducers;
-      if(!this.state.video && !this.state.lesson && JSON.stringify(courseDetail) !== '{}'){
-        this.getVideo(courseDetail.lessons[0].videos[0], courseDetail.lessons[0])
-      }
+      
+    const { courseDetail, isLoading } = this.props.stateOfLibraryReducers;
+    if(isLoading) return <div className="loading-login-page">...Loading</div>;
+      // if(!this.state.video && !this.state.lesson && JSON.stringify(courseDetail) !== '{}'){
+      //   const video = courseDetail.lessons.length > 0 ? courseDetail.lessons[0].videos[0] : "";
+      //   const lesson = courseDetail.lessons.length > 0 ? courseDetail.lessons[0] : "";
+      //   this.getVideo(video, lesson)
+      // }
         return ( 
             <div className="myCourses ">
             <div className="video-controls">
@@ -52,14 +58,7 @@ class MyCourse extends Component {
             
             */}
             {
-              !this.state.video.videoUrl ? 
-                <video 
-                  controls allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowFullScreen
-                  src={videoUrl + "/" + this.state.video.videoUrl}
-                >
-                  </video>
-              :
+              this.state.video.videoUrl &&
               <video 
                 controls allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowFullScreen
@@ -68,11 +67,11 @@ class MyCourse extends Component {
                 </video>
             }
               <div className="scorm-info-wr">
-                <p className="course-section-name">{this.state.lesson ? this.state.lesson.lessonName : "Chương 1. Ma trận - định thức"}</p>
-                <h1 className="scorm-name">{this.state.video ? this.state.video.titleName : "Bài 1. Ma trận"}</h1>
-                <p className="scorm-play-time">Độ dài: {this.state.video ? this.state.video.length : "19 phút"}</p>
+                <p className="course-section-name">{this.state.lesson ? this.state.lesson.lessonName : ""}</p>
+                <h1 className="scorm-name">{this.state.video ? this.state.video.titleName : ""}</h1>
+                <p className="scorm-play-time">{this.state.video ?`Độ dài: ${this.state.video.length}` : ""}</p>
               </div>
-              <ul className="scorm-detail-documents clearfix">
+              {this.state.lesson && <ul className="scorm-detail-documents clearfix">
                 <li className="clearfix">
                   <a href="https://hoc247.net/dai-so-tuyen-tinh/bai-1-ma-tran-l8259.html" className="scorm-document-name">
                     <i className="fa fa-book" /> Tài liệu bài giảng
@@ -83,7 +82,8 @@ class MyCourse extends Component {
                     <i className="fa fa-file" /> Bài tập tự luyện
                   </a>
                 </li>
-              </ul>
+              </ul>}
+              
             </div>
             <div className="slidebar-second fixsb">
               <div className="course-outline-head">
